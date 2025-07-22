@@ -41,7 +41,7 @@ function App() {
   );
 
   // 날씨 알림 시스템
-  const { testWeatherNotification } = useWeatherNotifications({
+  useWeatherNotifications({
     currentWeather
   });
 
@@ -145,7 +145,7 @@ function App() {
         <ApiUsageMonitor />
         
         {/* Schedule Card */}
-        <ScheduleCard onTestNotification={testWeatherNotification} />
+        <ScheduleCard />
         
         {/* Location Button */}
         <LocationButton />

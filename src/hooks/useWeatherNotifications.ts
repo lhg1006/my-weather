@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAppStore } from '../store/useAppStore';
-import { checkWeatherAlerts, consolidateAlerts, formatAlertMessage, createTestWeatherData } from '../utils/weatherNotifications';
+import { checkWeatherAlerts, consolidateAlerts, formatAlertMessage } from '../utils/weatherNotifications';
 import { getCurrentTimeStatus } from '../utils/schedule';
 import toast from 'react-hot-toast';
 import type { WeatherData } from '../types';
@@ -136,72 +136,5 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
     };
   }, [settings, currentWeather]);
 
-  // 수동으로 현재 날씨 알림 테스트 (개발용)
-  const testWeatherNotification = () => {
-    if (!settings.weatherNotifications.enabled) {
-      toast.error('날씨 알림이 비활성화되어 있습니다!', {
-        position: 'top-center',
-        duration: 3000,
-      });
-      return;
-    }
-
-    // 여러 시나리오를 순차적으로 테스트
-    const scenarios = ['rain', 'cold', 'hot', 'wind', 'multiple'] as const;
-    let currentScenario = 0;
-
-    const showNextTest = () => {
-      if (currentScenario >= scenarios.length) return;
-      
-      const testWeather = createTestWeatherData(scenarios[currentScenario]);
-      const alerts = checkWeatherAlerts(testWeather);
-      
-      if (alerts.length > 0) {
-        const filteredAlerts = alerts.filter(alert => {
-          if (alert.type === 'rain' && !settings.weatherNotifications.rainAlerts) return false;
-          if ((alert.type === 'cold' || alert.type === 'hot') && !settings.weatherNotifications.temperatureAlerts) return false;
-          if (alert.type === 'wind' && !settings.weatherNotifications.windAlerts) return false;
-          return true;
-        });
-
-        const consolidatedAlerts = consolidateAlerts(filteredAlerts);
-        
-        consolidatedAlerts.forEach((alert, index) => {
-          setTimeout(() => {
-            toast(alert.message, {
-              duration: 4000,
-              position: 'top-center',
-              style: {
-                background: alert.severity === 'high' ? '#ef4444' : 
-                           alert.severity === 'medium' ? '#f97316' : '#3b82f6',
-                color: 'white',
-                fontWeight: '500',
-                backdropFilter: 'blur(10px)',
-                lineHeight: '1.4',
-                minHeight: '48px',
-                display: 'flex',
-                alignItems: 'center',
-                whiteSpace: 'nowrap',
-              },
-              icon: false,
-            });
-          }, index * 1000);
-        });
-      }
-
-      currentScenario++;
-      setTimeout(showNextTest, 3000); // 3초 후 다음 테스트
-    };
-
-    toast.success('날씨 알림 테스트를 시작합니다!', {
-      position: 'top-center',
-      duration: 2000,
-    });
-
-    setTimeout(showNextTest, 1000);
-  };
-
-  return {
-    testWeatherNotification
-  };
+  return {};
 };

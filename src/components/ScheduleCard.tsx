@@ -3,13 +3,9 @@ import { motion } from 'framer-motion';
 import { useAppStore } from '../store/useAppStore';
 import { getCurrentTimeStatus, getNextScheduleEvent } from '../utils/schedule';
 import { Card } from './ui';
-import { Clock, Briefcase, Activity, Coffee, TestTube } from 'lucide-react';
+import { Clock, Briefcase, Activity, Coffee } from 'lucide-react';
 
-interface ScheduleCardProps {
-  onTestNotification?: () => void;
-}
-
-export const ScheduleCard = ({ onTestNotification }: ScheduleCardProps) => {
+export const ScheduleCard = () => {
   const { settings } = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -172,23 +168,6 @@ export const ScheduleCard = ({ onTestNotification }: ScheduleCardProps) => {
             {settings.schedule.activityStartTime} - {settings.schedule.activityEndTime}
           </span>
         </div>
-        
-        {/* 테스트 버튼 (개발환경에서만) */}
-        {onTestNotification && !import.meta.env.PROD && (
-          <div 
-            className="flex items-center justify-center p-3 rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
-            style={{
-              background: 'rgba(59, 130, 246, 0.3)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(59, 130, 246, 0.4)',
-              boxShadow: '0 4px 16px rgba(59, 130, 246, 0.2)'
-            }}
-            onClick={onTestNotification}
-          >
-            <TestTube className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" />
-            <span className="text-blue-600 dark:text-blue-400 font-medium">날씨 알림 테스트</span>
-          </div>
-        )}
       </div>
       </Card>
     </motion.div>
