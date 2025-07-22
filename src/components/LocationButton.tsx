@@ -27,7 +27,7 @@ export const LocationButton = () => {
       <Button
         onClick={requestLocation}
         isLoading={isLocationLoading}
-        variant={hasLocation ? 'secondary' : 'primary'}
+        variant="glass"
         leftIcon={isLocationLoading ? <Loader2 className="w-5 h-5" /> : <MapPin className="w-5 h-5" />}
         className="w-full"
       >
