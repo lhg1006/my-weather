@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 interface ButtonProps {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'glass';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   leftIcon?: ReactNode;
@@ -32,6 +32,7 @@ export const Button = ({
     primary: 'ios-button',
     secondary: 'ios-button-secondary',
     ghost: 'bg-transparent text-ios-blue hover:bg-ios-blue/10 dark:text-white dark:hover:bg-white/10',
+    glass: 'bg-white/30 dark:bg-slate-700/30 backdrop-blur-md border border-white/40 dark:border-slate-600/40 text-slate-700 dark:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-600/40 shadow-lg hover:shadow-xl transition-all duration-200',
   };
 
   const sizeClasses = {
