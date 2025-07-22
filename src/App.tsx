@@ -13,10 +13,7 @@ import { ForecastCard } from './components/ForecastCard';
 import { LocationButton } from './components/LocationButton';
 import { SettingsModal } from './components/SettingsModal';
 import { ScheduleCard } from './components/ScheduleCard';
-import { ApiKeyStatus } from './components/ApiKeyStatus';
 import { ApiUsageMonitor } from './components/ApiUsageMonitor';
-import { EnvDebugger } from './components/EnvDebugger';
-import { ApiKeyTester } from './components/ApiKeyTester';
 import { Button, LoadingSpinner } from './components/ui';
 
 function App() {
@@ -138,15 +135,6 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-md mx-auto px-4 py-6">
-        {/* Environment Debugger (dev only) */}
-        <EnvDebugger />
-        
-        {/* API Key Tester (dev only) */}
-        <ApiKeyTester />
-        
-        {/* API Key Status */}
-        <ApiKeyStatus />
-        
         {/* API Usage Monitor */}
         <ApiUsageMonitor />
         
