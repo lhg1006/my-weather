@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store/useAppStore';
 import { Button, Card } from './ui';
-import { X, Globe, Palette, Thermometer, Clock, Bell } from 'lucide-react';
+import { X, Globe, Palette, Thermometer, Clock, Bell, CloudRain } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -70,6 +70,12 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
   const handleScheduleChange = (scheduleUpdate: Partial<typeof settings.schedule>) => {
     updateSettings({ 
       schedule: { ...settings.schedule, ...scheduleUpdate } 
+    });
+  };
+
+  const handleWeatherNotificationChange = (notificationUpdate: Partial<typeof settings.weatherNotifications>) => {
+    updateSettings({
+      weatherNotifications: { ...settings.weatherNotifications, ...notificationUpdate }
     });
   };
 
@@ -476,6 +482,142 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                           <Bell className="w-4 h-4" />
                           <span>알림 설정</span>
                         </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 날씨 알림 설정 */}
+                <div>
+                  <div className="flex items-center justify-between mb-3 mt-6">
+                    <div className="flex items-center">
+                      <CloudRain className="w-5 h-5 text-ios-blue mr-2" />
+                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                        날씨 알림
+                      </h3>
+                    </div>
+                  </div>
+                  
+                  {/* 날씨 알림 기능 활성화 */}
+                  <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600 mb-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                        날씨 알림 사용
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        스케줄 시간 전에 날씨 상황을 알려드립니다
+                      </p>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={settings.weatherNotifications.enabled}
+                        onChange={(e) => handleWeatherNotificationChange({ enabled: e.target.checked })}
+                        className="sr-only"
+                      />
+                      <div className={`w-11 h-6 rounded-full transition-colors duration-200 ${
+                        settings.weatherNotifications.enabled 
+                          ? 'bg-ios-blue' 
+                          : 'bg-gray-300 dark:bg-gray-600'
+                      }`}>
+                        <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                          settings.weatherNotifications.enabled ? 'translate-x-5' : 'translate-x-0.5'
+                        } mt-0.5`} />
+                      </div>
+                    </label>
+                  </div>
+                  
+                  {settings.weatherNotifications.enabled && (
+                    <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
+                      {/* 알림 타입 설정 */}
+                      <div className="space-y-3">
+                        {/* 비/눈 알림 */}
+                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                          <div className="flex items-center">
+                            <span className="text-sm text-gray-700 dark:text-gray-300">☔ 비/눈 알림</span>
+                          </div>
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={settings.weatherNotifications.rainAlerts}
+                              onChange={(e) => handleWeatherNotificationChange({ rainAlerts: e.target.checked })}
+                              className="sr-only"
+                            />
+                            <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
+                              settings.weatherNotifications.rainAlerts 
+                                ? 'bg-blue-500' 
+                                : 'bg-gray-300 dark:bg-gray-600'
+                            }`}>
+                              <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                                settings.weatherNotifications.rainAlerts ? 'translate-x-4' : 'translate-x-0.5'
+                              } mt-0.5`} />
+                            </div>
+                          </label>
+                        </div>
+
+                        {/* 온도 알림 */}
+                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                          <div className="flex items-center">
+                            <span className="text-sm text-gray-700 dark:text-gray-300">🌡️ 극한 온도 알림</span>
+                          </div>
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={settings.weatherNotifications.temperatureAlerts}
+                              onChange={(e) => handleWeatherNotificationChange({ temperatureAlerts: e.target.checked })}
+                              className="sr-only"
+                            />
+                            <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
+                              settings.weatherNotifications.temperatureAlerts 
+                                ? 'bg-orange-500' 
+                                : 'bg-gray-300 dark:bg-gray-600'
+                            }`}>
+                              <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                                settings.weatherNotifications.temperatureAlerts ? 'translate-x-4' : 'translate-x-0.5'
+                              } mt-0.5`} />
+                            </div>
+                          </label>
+                        </div>
+
+                        {/* 바람 알림 */}
+                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                          <div className="flex items-center">
+                            <span className="text-sm text-gray-700 dark:text-gray-300">💨 강풍 알림</span>
+                          </div>
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={settings.weatherNotifications.windAlerts}
+                              onChange={(e) => handleWeatherNotificationChange({ windAlerts: e.target.checked })}
+                              className="sr-only"
+                            />
+                            <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
+                              settings.weatherNotifications.windAlerts 
+                                ? 'bg-green-500' 
+                                : 'bg-gray-300 dark:bg-gray-600'
+                            }`}>
+                              <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                                settings.weatherNotifications.windAlerts ? 'translate-x-4' : 'translate-x-0.5'
+                              } mt-0.5`} />
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* 알림 타이밍 설정 */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          알림 시간 (몇 분 전)
+                        </label>
+                        <select
+                          value={settings.weatherNotifications.notifyBefore}
+                          onChange={(e) => handleWeatherNotificationChange({ notifyBefore: parseInt(e.target.value) })}
+                          className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-ios-blue focus:border-ios-blue"
+                        >
+                          <option value={15}>15분 전</option>
+                          <option value={30}>30분 전</option>
+                          <option value={60}>60분 전</option>
+                        </select>
                       </div>
                     </div>
                   )}

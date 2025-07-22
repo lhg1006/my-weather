@@ -7,6 +7,7 @@ import { Settings, RefreshCw } from 'lucide-react';
 import { useAppStore } from './store/useAppStore';
 import { useGeolocation } from './hooks/useGeolocation';
 import { useWeatherData } from './hooks/useWeatherQuery';
+import { useWeatherNotifications } from './hooks/useWeatherNotifications';
 
 import { WeatherCard } from './components/WeatherCard';
 import { ForecastCard } from './components/ForecastCard';
@@ -38,6 +39,11 @@ function App() {
     currentLocation?.latitude || null,
     currentLocation?.longitude || null
   );
+
+  // 날씨 알림 시스템
+  const { testWeatherNotification } = useWeatherNotifications({
+    currentWeather
+  });
 
   // 앱 시작 시 위치 요청
   useEffect(() => {

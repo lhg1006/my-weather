@@ -41,6 +41,14 @@ export interface DailyForecast {
 }
 
 
+export interface WeatherNotificationSettings {
+  enabled: boolean; // 날씨 알림 전체 활성화 여부
+  rainAlerts: boolean; // 비/눈 알림
+  temperatureAlerts: boolean; // 극한 온도 알림
+  windAlerts: boolean; // 강풍 알림
+  notifyBefore: number; // 몇 분 전에 알림할지 (기본 30분)
+}
+
 export interface ScheduleSettings {
   workStartTime: string; // 출근 가능 시작 시간 "07:00"
   workEndTime: string;   // 출근 가능 종료 시간 "10:00"
@@ -59,6 +67,7 @@ export interface AppSettings {
   theme: 'light' | 'dark' | 'system';
   temperatureUnit: 'celsius' | 'fahrenheit';
   schedule: ScheduleSettings;
+  weatherNotifications: WeatherNotificationSettings;
 }
 
 export interface WeatherApiError {

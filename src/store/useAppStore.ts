@@ -46,6 +46,13 @@ const defaultSettings: AppSettings = {
     leaveNotificationEnabled: false,
     activityNotificationEnabled: false,
   },
+  weatherNotifications: {
+    enabled: true,
+    rainAlerts: true,
+    temperatureAlerts: true,
+    windAlerts: true,
+    notifyBefore: 30, // 30분 전
+  },
 };
 
 export const useAppStore = create<AppState>()(
