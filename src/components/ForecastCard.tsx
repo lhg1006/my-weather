@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import type { HourlyForecast, DailyForecast } from '../types';
 import { Card } from './ui';
@@ -17,6 +17,23 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
   const { t } = useTranslation();
   const { settings } = useAppStore();
   const [isDark, setIsDark] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // 스크롤바 숨기기 스타일 추가
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
   
   const locale = settings.language === 'ko' ? ko : enUS;
   
@@ -43,6 +60,25 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
   // 다음 7일 예보
   const next7Days = daily.slice(0, 7);
 
+  // 스크롤 기능
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -200,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 200,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <motion.div 
       className="space-y-6"
@@ -60,8 +96,41 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
           {t('weather.hourlyForecast')}
         </h3>
         
-        <div className="overflow-x-auto">
-          <div className="flex space-x-4 pb-2">
+        <div className="relative">
+          {/* 왼쪽 스크롤 버튼 */}
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+            style={{
+              background: isDark ? 'rgba(51, 65, 85, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(12px)',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.4)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            }}
+          >
+            <span className="text-slate-600 dark:text-slate-300 text-sm font-bold">‹</span>
+          </button>
+
+          {/* 오른쪽 스크롤 버튼 */}
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+            style={{
+              background: isDark ? 'rgba(51, 65, 85, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(12px)',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.4)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            }}
+          >
+            <span className="text-slate-600 dark:text-slate-300 text-sm font-bold">›</span>
+          </button>
+
+          {/* 스크롤 컨테이너 */}
+          <div 
+            ref={scrollContainerRef}
+            className="overflow-x-auto hide-scrollbar"
+          >
+            <div className="flex space-x-4 pb-2 px-6">
             {next24Hours.map((hour, index) => (
               <motion.div 
                 key={index}
@@ -112,6 +181,7 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
                 )}
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </Card>
