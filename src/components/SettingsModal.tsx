@@ -77,7 +77,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className="w-full max-w-md max-h-[90vh] flex flex-col"
+            className="w-full max-w-md h-[80vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <Card className="flex flex-col h-full">
@@ -95,7 +95,13 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 </Button>
               </div>
 
-              <div className="flex-1 overflow-y-auto px-6 py-4 min-h-0 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent">
+              <div 
+                className="flex-1 overflow-y-auto px-6 py-4 min-h-0 [&::-webkit-scrollbar]:hidden" 
+                style={{
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none'
+                }}
+              >
                 <div className="space-y-6"></div>
                 {/* 언어 설정 */}
                 <div>
