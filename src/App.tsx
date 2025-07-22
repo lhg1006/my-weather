@@ -14,7 +14,6 @@ import { ForecastCard } from './components/ForecastCard';
 import { LocationButton } from './components/LocationButton';
 import { SettingsModal } from './components/SettingsModal';
 import { ScheduleCard } from './components/ScheduleCard';
-import { ApiUsageMonitor } from './components/ApiUsageMonitor';
 import { Button, LoadingSpinner } from './components/ui';
 
 function App() {
@@ -141,9 +140,6 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-md mx-auto px-4 py-6">
-        {/* API Usage Monitor */}
-        <ApiUsageMonitor />
-        
         {/* Schedule Card */}
         <ScheduleCard />
         
