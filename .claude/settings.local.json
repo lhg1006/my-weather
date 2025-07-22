@@ -25,7 +25,8 @@
       "Bash(git rm:*)",
       "Bash(cp:*)",
       "Bash(node:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git pull:*)"
     ],
     "deny": []
   }
