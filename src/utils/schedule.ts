@@ -7,6 +7,7 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
 
   const now = new Date();
   const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+  const currentMinutes = convertToMinutes(currentTime);
   
   // 출근 가능 시간 확인
   const canWork = schedule.workStartTime && schedule.workEndTime ? 
@@ -17,10 +18,55 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
   const isActivityTime = schedule.activityStartTime && schedule.activityEndTime ? 
     isTimeInRange(currentTime, schedule.activityStartTime, schedule.activityEndTime) : false;
   
+  // 퇴근까지 남은 시간 계산
+  const getTimeUntilLeave = () => {
+    if (!schedule.leaveStartTime) return null;
+    
+    const leaveMinutes = convertToMinutes(schedule.leaveStartTime);
+    let timeUntil = leaveMinutes - currentMinutes;
+    
+    // 다음날 퇴근 시간인 경우
+    if (timeUntil <= 0) {
+      timeUntil = (24 * 60) + timeUntil;
+    }
+    
+    const hours = Math.floor(timeUntil / 60);
+    const minutes = timeUntil % 60;
+    
+    if (hours > 0) {
+      return `${hours}시간 ${minutes}분 후`;
+    } else {
+      return `${minutes}분 후`;
+    }
+  };
+  
+  // 출근까지 남은 시간 계산  
+  const getTimeUntilWork = () => {
+    if (!schedule.workStartTime) return null;
+    
+    const workMinutes = convertToMinutes(schedule.workStartTime);
+    let timeUntil = workMinutes - currentMinutes;
+    
+    // 다음날 출근 시간인 경우
+    if (timeUntil <= 0) {
+      timeUntil = (24 * 60) + timeUntil;
+    }
+    
+    const hours = Math.floor(timeUntil / 60);
+    const minutes = timeUntil % 60;
+    
+    if (hours > 0) {
+      return `${hours}시간 ${minutes}분 후`;
+    } else {
+      return `${minutes}분 후`;
+    }
+  };
+  
   if (canWork) {
+    const timeUntilLeave = getTimeUntilLeave();
     return {
       status: 'canWork' as const,
-      message: '출근 가능 시간입니다',
+      message: timeUntilLeave ? `퇴근까지: ${timeUntilLeave}` : '출근 가능 시간입니다',
       type: 'work'
     };
   }
@@ -41,9 +87,11 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
     };
   }
   
+  // 휴식 시간에는 출근까지 남은 시간 표시
+  const timeUntilWork = getTimeUntilWork();
   return {
     status: 'rest' as const,
-    message: '휴식 시간입니다',
+    message: timeUntilWork ? `출근까지: ${timeUntilWork}` : '휴식 시간입니다',
     type: 'rest'
   };
 };

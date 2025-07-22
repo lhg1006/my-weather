@@ -12,7 +12,7 @@ export const ScheduleCard = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 60000); // 1분마다 업데이트
+    }, 1000); // 1초마다 업데이트 (실시간 카운트다운)
 
     return () => clearInterval(timer);
   }, []);
@@ -22,6 +22,7 @@ export const ScheduleCard = () => {
     return null;
   }
 
+  // currentTime이 변경될 때마다 재계산
   const timeStatus = getCurrentTimeStatus(settings.schedule);
   const nextEvent = getNextScheduleEvent(settings.schedule);
 
