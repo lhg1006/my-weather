@@ -1,5 +1,6 @@
 import type { WeatherData, HourlyForecast, DailyForecast } from '../../types';
 import { rateLimiter } from './rateLimiter';
+import toast from 'react-hot-toast';
 
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -9,7 +10,9 @@ export class WeatherService {
     try {
       // 무료 할당량 체크
       if (!rateLimiter.canMakeCall('openweather')) {
-        console.warn('OpenWeatherMap API 호출 한도에 도달했습니다.');
+        const stats = rateLimiter.getUsageStats();
+        const remainingTime = rateLimiter.getRemainingTime('openweather');
+        toast.error(`30초마다 새로고침 가능합니다 (${remainingTime}초 후)`);
         return null;
       }
 
@@ -74,7 +77,8 @@ export class WeatherService {
     try {
       // 무료 할당량 체크
       if (!rateLimiter.canMakeCall('openweather')) {
-        console.warn('OpenWeatherMap 예보 호출 한도에 도달했습니다.');
+        const remainingTime = rateLimiter.getRemainingTime('openweather');
+        toast.error(`30초마다 새로고침 가능합니다 (${remainingTime}초 후)`);
         throw new Error('API 호출 한도에 도달했습니다. 잠시 후 다시 시도해주세요.');
       }
 

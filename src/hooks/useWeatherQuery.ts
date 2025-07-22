@@ -52,8 +52,17 @@ export const useWeatherData = (lat: number | null, lon: number | null) => {
     isError: currentWeatherQuery.isError || forecastQuery.isError,
     error: currentWeatherQuery.error || forecastQuery.error,
     
-    // 리프레시 함수
-    refetch: () => {
+    // 리프레시 함수 - 30초 간격 체크 후 실행
+    refetch: async () => {
+      const { rateLimiter } = await import('../services/weather/rateLimiter');
+      const toast = (await import('react-hot-toast')).default;
+      
+      if (!rateLimiter.canMakeCall('openweather')) {
+        const remainingTime = rateLimiter.getRemainingTime('openweather');
+        toast.error(`30초마다 새로고침 가능합니다 (${remainingTime}초 후)`);
+        return;
+      }
+      
       currentWeatherQuery.refetch();
       forecastQuery.refetch();
     },

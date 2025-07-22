@@ -74,8 +74,6 @@ class RateLimiter {
     const minInterval = 30 * 1000; // 30초
     
     if (timeSinceLastCall < minInterval) {
-      const remainingTime = Math.ceil((minInterval - timeSinceLastCall) / 1000);
-      console.warn(`OpenWeather: 30초 간격 제한 (${remainingTime}초 후 재시도 가능)`);
       return false;
     }
     
@@ -136,6 +134,15 @@ class RateLimiter {
     this.dailyCalls = {};
     this.saveToStorage();
     console.log('일일 API 호출 한도가 리셋되었습니다.');
+  }
+
+  getRemainingTime(apiName: 'openweather'): number {
+    const lastCall = this.lastCallTime[apiName] || 0;
+    const timeSinceLastCall = Date.now() - lastCall;
+    const minInterval = 30 * 1000; // 30초
+    const remainingTime = Math.ceil((minInterval - timeSinceLastCall) / 1000);
+    
+    return Math.max(0, remainingTime);
   }
 }
 
