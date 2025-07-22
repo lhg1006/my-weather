@@ -66,7 +66,8 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
     const timeUntilLeave = getTimeUntilLeave();
     return {
       status: 'canWork' as const,
-      message: timeUntilLeave ? `퇴근까지: ${timeUntilLeave}` : '출근 가능 시간입니다',
+      message: '출근 시간',
+      timeUntil: timeUntilLeave ? `퇴근까지: ${timeUntilLeave}` : null,
       type: 'work'
     };
   }
@@ -74,38 +75,17 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
   if (canLeave) {
     return {
       status: 'canLeave' as const,
-      message: '퇴근 가능 시간입니다',
+      message: '퇴근 시간',
+      timeUntil: null,
       type: 'work'
     };
   }
   
   if (isActivityTime) {
-    // 활동 종료까지 남은 시간 계산
-    const getTimeUntilActivityEnd = () => {
-      if (!schedule.activityEndTime) return null;
-      
-      const activityEndMinutes = convertToMinutes(schedule.activityEndTime);
-      let timeUntil = activityEndMinutes - currentMinutes;
-      
-      // 다음날 활동 종료 시간인 경우
-      if (timeUntil <= 0) {
-        timeUntil = (24 * 60) + timeUntil;
-      }
-      
-      const hours = Math.floor(timeUntil / 60);
-      const minutes = timeUntil % 60;
-      
-      if (hours > 0) {
-        return `${hours}시간 ${minutes}분 후`;
-      } else {
-        return `${minutes}분 후`;
-      }
-    };
-
-    const timeUntilActivityEnd = getTimeUntilActivityEnd();
     return {
       status: 'activity' as const,
-      message: timeUntilActivityEnd ? `활동 종료까지: ${timeUntilActivityEnd}` : '활동 시간입니다',
+      message: '활동 시간',
+      timeUntil: null,
       type: 'activity'
     };
   }
@@ -114,7 +94,8 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
   const timeUntilWork = getTimeUntilWork();
   return {
     status: 'rest' as const,
-    message: timeUntilWork ? `출근까지: ${timeUntilWork}` : '휴식 시간입니다',
+    message: '휴식 시간',
+    timeUntil: timeUntilWork ? `출근까지: ${timeUntilWork}` : null,
     type: 'rest'
   };
 };

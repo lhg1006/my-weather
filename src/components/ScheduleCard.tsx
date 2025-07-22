@@ -95,9 +95,9 @@ export const ScheduleCard = () => {
               {timeStatus.message || '스케줄 활성화됨'}
             </h3>
             
-            {nextEvent && (
+            {timeStatus.timeUntil && (
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                {nextEvent.type}: {nextEvent.timeUntil}
+                {timeStatus.timeUntil}
               </p>
             )}
           </div>
