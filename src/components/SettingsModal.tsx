@@ -222,33 +222,26 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 </div>
 
                 {/* 스케줄 설정 */}
-                <div className="backdrop-blur-md bg-white/20 dark:bg-white/5 rounded-2xl p-6 border border-white/30 dark:border-white/10 shadow-xl">
-                  <div className="flex items-center justify-between mb-4">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center">
-                      <div className="w-10 h-10 backdrop-blur-sm bg-white/20 dark:bg-white/10 rounded-xl flex items-center justify-center mr-3 border border-white/30">
-                        <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                          {t('settings.schedule')}
-                        </h3>
-                        <p className="text-xs text-slate-600 dark:text-slate-400">
-                          일정 기반 날씨 알림
-                        </p>
-                      </div>
+                      <Clock className="w-5 h-5 text-ios-blue mr-2" />
+                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                        {t('settings.schedule')}
+                      </h3>
                     </div>
-                    <button className="p-2 backdrop-blur-sm bg-white/30 dark:bg-white/10 rounded-xl hover:bg-white/40 dark:hover:bg-white/20 transition-all duration-200 border border-white/30">
-                      <Bell className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                      <Bell className="w-4 h-4 text-ios-blue" />
                     </button>
                   </div>
                   
                   {/* 스케줄 기능 활성화 */}
-                  <div className="flex items-center justify-between mb-6 p-4 backdrop-blur-sm bg-white/30 dark:bg-white/5 rounded-xl border border-white/40 dark:border-white/10">
+                  <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600 mb-4">
                     <div>
-                      <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">
                         {t('settings.enableSchedule')}
                       </p>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         {t('settings.scheduleDescription')}
                       </p>
                     </div>
@@ -259,132 +252,132 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         onChange={(e) => handleScheduleChange({ enabled: e.target.checked })}
                         className="sr-only"
                       />
-                      <div className={`w-12 h-6 rounded-full transition-all duration-300 backdrop-blur-sm ${
+                      <div className={`w-11 h-6 rounded-full transition-colors duration-200 ${
                         settings.schedule.enabled 
-                          ? 'bg-blue-500/80' 
-                          : 'bg-white/40 dark:bg-white/20'
-                      } border border-white/30`}>
-                        <div className={`w-5 h-5 bg-white rounded-full shadow-lg transform transition-transform duration-300 ${
-                          settings.schedule.enabled ? 'translate-x-6' : 'translate-x-0.5'
-                        } mt-0.5 border border-white/50`} />
+                          ? 'bg-ios-blue' 
+                          : 'bg-gray-300 dark:bg-gray-600'
+                      }`}>
+                        <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                          settings.schedule.enabled ? 'translate-x-5' : 'translate-x-0.5'
+                        } mt-0.5`} />
                       </div>
                     </label>
                   </div>
                   
                   {settings.schedule.enabled && (
-                    <div className="space-y-6 animate-in slide-in-from-top-2 duration-300">
+                    <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
                       {/* 출근 가능 시간 */}
-                      <div className="backdrop-blur-sm bg-white/20 dark:bg-white/5 rounded-xl p-4 border border-white/30 dark:border-white/10">
-                        <div className="flex items-center mb-3">
-                          <div className="w-6 h-6 bg-emerald-500/90 backdrop-blur-sm rounded-lg flex items-center justify-center mr-2 border border-white/30">
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
                             <span className="text-white text-xs font-bold">출</span>
                           </div>
-                          <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                          <label className="text-sm font-medium text-gray-900 dark:text-white">
                             {t('settings.workTimeRange')}
                           </label>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-2">
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.from')}
                             </label>
                             <input
                               type="time"
                               value={settings.schedule.workStartTime}
                               onChange={(e) => handleScheduleChange({ workStartTime: e.target.value })}
-                              className="w-full px-4 py-3 backdrop-blur-sm bg-white/40 dark:bg-white/10 border border-white/30 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
+                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-2">
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.to')}
                             </label>
                             <input
                               type="time"
                               value={settings.schedule.workEndTime}
                               onChange={(e) => handleScheduleChange({ workEndTime: e.target.value })}
-                              className="w-full px-4 py-3 backdrop-blur-sm bg-white/40 dark:bg-white/10 border border-white/30 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
+                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                         </div>
                       </div>
                       
                       {/* 퇴근 가능 시간 */}
-                      <div className="backdrop-blur-sm bg-white/20 dark:bg-white/5 rounded-xl p-4 border border-white/30 dark:border-white/10">
-                        <div className="flex items-center mb-3">
-                          <div className="w-6 h-6 bg-orange-500/90 backdrop-blur-sm rounded-lg flex items-center justify-center mr-2 border border-white/30">
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
                             <span className="text-white text-xs font-bold">퇴</span>
                           </div>
-                          <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                          <label className="text-sm font-medium text-gray-900 dark:text-white">
                             {t('settings.leaveTimeRange')}
                           </label>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-xs text-orange-600 dark:text-orange-400 font-medium mb-2">
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.from')}
                             </label>
                             <input
                               type="time"
                               value={settings.schedule.leaveStartTime}
                               onChange={(e) => handleScheduleChange({ leaveStartTime: e.target.value })}
-                              className="w-full px-4 py-3 backdrop-blur-sm bg-white/40 dark:bg-white/10 border border-white/30 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all"
+                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs text-orange-600 dark:text-orange-400 font-medium mb-2">
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.to')}
                             </label>
                             <input
                               type="time"
                               value={settings.schedule.leaveEndTime}
                               onChange={(e) => handleScheduleChange({ leaveEndTime: e.target.value })}
-                              className="w-full px-4 py-3 backdrop-blur-sm bg-white/40 dark:bg-white/10 border border-white/30 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all"
+                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                         </div>
                       </div>
                       
                       {/* 활동 시간 */}
-                      <div className="backdrop-blur-sm bg-white/20 dark:bg-white/5 rounded-xl p-4 border border-white/30 dark:border-white/10">
-                        <div className="flex items-center mb-3">
-                          <div className="w-6 h-6 bg-purple-500/90 backdrop-blur-sm rounded-lg flex items-center justify-center mr-2 border border-white/30">
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2">
                             <span className="text-white text-xs font-bold">활</span>
                           </div>
-                          <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                          <label className="text-sm font-medium text-gray-900 dark:text-white">
                             활동 시간
                           </label>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-xs text-purple-600 dark:text-purple-400 font-medium mb-2">
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.activityStartTime')}
                             </label>
                             <input
                               type="time"
                               value={settings.schedule.activityStartTime}
                               onChange={(e) => handleScheduleChange({ activityStartTime: e.target.value })}
-                              className="w-full px-4 py-3 backdrop-blur-sm bg-white/40 dark:bg-white/10 border border-white/30 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs text-purple-600 dark:text-purple-400 font-medium mb-2">
+                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.activityEndTime')}
                             </label>
                             <input
                               type="time"
                               value={settings.schedule.activityEndTime}
                               onChange={(e) => handleScheduleChange({ activityEndTime: e.target.value })}
-                              className="w-full px-4 py-3 backdrop-blur-sm bg-white/40 dark:bg-white/10 border border-white/30 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             />
                           </div>
                         </div>
                       </div>
 
                       {/* 알림 설정 버튼 */}
-                      <div className="mt-6">
-                        <button className="w-full backdrop-blur-md bg-blue-500/80 hover:bg-blue-600/80 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center space-x-2 border border-white/30">
-                          <Bell className="w-5 h-5" />
+                      <div className="mt-4">
+                        <button className="w-full bg-ios-blue hover:bg-ios-blue/90 text-white font-medium py-3 px-4 rounded-ios transition-colors flex items-center justify-center space-x-2">
+                          <Bell className="w-4 h-4" />
                           <span>알림 설정</span>
                         </button>
                       </div>
