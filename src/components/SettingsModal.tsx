@@ -481,15 +481,6 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   )}
                 </div>
               </div>
-
-              <div className="flex-shrink-0 p-6 pt-4 border-t border-slate-200 dark:border-slate-600">
-                <Button
-                  onClick={onClose}
-                  className="w-full"
-                >
-                  {t('common.save')}
-                </Button>
-              </div>
             </Card>
           </motion.div>
         </motion.div>
