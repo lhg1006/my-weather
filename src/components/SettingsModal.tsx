@@ -81,7 +81,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-4 pb-4 px-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -89,10 +89,10 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className="w-full max-w-md h-[80vh] flex flex-col"
+            className="w-full max-w-md max-h-[calc(100vh-2rem)] flex flex-col my-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <Card className="flex flex-col h-full">
+            <Card className="flex flex-col h-full min-h-0">
               <div className="flex items-center justify-between p-6 pb-4 flex-shrink-0 border-b border-slate-200 dark:border-slate-600">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {t('settings.title')}
@@ -108,7 +108,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
               </div>
 
               <div 
-                className="flex-1 overflow-y-scroll px-6 py-4 min-h-0 hide-scrollbar" 
+                className="flex-1 overflow-y-auto px-6 py-4 min-h-0 hide-scrollbar" 
                 style={{
                   scrollbarWidth: 'none',
                   msOverflowStyle: 'none'
