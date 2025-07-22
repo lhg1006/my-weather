@@ -95,7 +95,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 </Button>
               </div>
 
-              <div className="flex-1 overflow-y-auto px-6 py-4">
+              <div className="flex-1 overflow-y-auto px-6 py-4 min-h-0 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent">
                 <div className="space-y-6"></div>
                 {/* 언어 설정 */}
                 <div>
