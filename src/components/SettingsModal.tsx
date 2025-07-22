@@ -296,7 +296,11 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             </label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Bell className="w-4 h-4 text-gray-400" />
+                            <Bell className={`w-4 h-4 transition-colors duration-200 ${
+                              settings.schedule.workNotificationEnabled 
+                                ? 'text-emerald-500' 
+                                : 'text-gray-400'
+                            }`} />
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input
                                 type="checkbox"
@@ -354,7 +358,11 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             </label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Bell className="w-4 h-4 text-gray-400" />
+                            <Bell className={`w-4 h-4 transition-colors duration-200 ${
+                              settings.schedule.leaveNotificationEnabled 
+                                ? 'text-orange-500' 
+                                : 'text-gray-400'
+                            }`} />
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input
                                 type="checkbox"
@@ -412,7 +420,11 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             </label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Bell className="w-4 h-4 text-gray-400" />
+                            <Bell className={`w-4 h-4 transition-colors duration-200 ${
+                              settings.schedule.activityNotificationEnabled 
+                                ? 'text-purple-500' 
+                                : 'text-gray-400'
+                            }`} />
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input
                                 type="checkbox"
