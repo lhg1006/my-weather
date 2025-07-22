@@ -99,7 +99,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 <div className="space-y-6"></div>
                 {/* 언어 설정 */}
                 <div>
-                  <div className="flex items-center mb-3">
+                  <div className="flex items-center mb-3 mt-2">
                     <Globe className="w-5 h-5 text-ios-blue mr-2" />
                     <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                       {t('settings.language')}
@@ -153,7 +153,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
 
                 {/* 테마 설정 */}
                 <div>
-                  <div className="flex items-center mb-3">
+                  <div className="flex items-center mb-3 mt-6">
                     <Palette className="w-5 h-5 text-ios-blue mr-2" />
                     <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                       {t('settings.theme')}
@@ -188,7 +188,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
 
                 {/* 온도 단위 */}
                 <div>
-                  <div className="flex items-center mb-3">
+                  <div className="flex items-center mb-3 mt-6">
                     <Thermometer className="w-5 h-5 text-ios-blue mr-2" />
                     <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                       {t('settings.units')}
@@ -223,7 +223,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
 
                 {/* 스케줄 설정 */}
                 <div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-3 mt-6">
                     <div className="flex items-center">
                       <Clock className="w-5 h-5 text-ios-blue mr-2" />
                       <h3 className="text-sm font-medium text-gray-900 dark:text-white">
