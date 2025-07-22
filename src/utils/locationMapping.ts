@@ -378,13 +378,6 @@ export const WEATHER_DESCRIPTION_KR: Record<string, string> = {
  */
 export function getCityNameInKorean(englishName: string): string {
   const koreanName = CITY_NAME_KR[englishName];
-  
-  // 매핑되지 않은 도시명 디버깅
-  if (!koreanName) {
-    console.warn(`🗺️ 한국어 매핑이 없는 도시: "${englishName}"`);
-    console.log('💡 이 도시를 한국어로 추가하려면 locationMapping.ts에 추가하세요');
-  }
-  
   return koreanName || englishName;
 }
 
@@ -400,13 +393,6 @@ export function getCountryNameInKorean(countryCode: string): string {
  */
 export function getWeatherDescriptionInKorean(englishDescription: string): string {
   const koreanDescription = WEATHER_DESCRIPTION_KR[englishDescription.toLowerCase()];
-  
-  // 매핑되지 않은 날씨 설명 디버깅
-  if (!koreanDescription) {
-    console.warn(`🌤️ 한국어 매핑이 없는 날씨 설명: "${englishDescription}"`);
-    console.log('💡 이 날씨 설명을 한국어로 추가하려면 locationMapping.ts에 추가하세요');
-  }
-  
   return koreanDescription || englishDescription;
 }
 
