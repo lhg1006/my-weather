@@ -80,9 +80,32 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
   }
   
   if (isActivityTime) {
+    // 활동 종료까지 남은 시간 계산
+    const getTimeUntilActivityEnd = () => {
+      if (!schedule.activityEndTime) return null;
+      
+      const activityEndMinutes = convertToMinutes(schedule.activityEndTime);
+      let timeUntil = activityEndMinutes - currentMinutes;
+      
+      // 다음날 활동 종료 시간인 경우
+      if (timeUntil <= 0) {
+        timeUntil = (24 * 60) + timeUntil;
+      }
+      
+      const hours = Math.floor(timeUntil / 60);
+      const minutes = timeUntil % 60;
+      
+      if (hours > 0) {
+        return `${hours}시간 ${minutes}분 후`;
+      } else {
+        return `${minutes}분 후`;
+      }
+    };
+
+    const timeUntilActivityEnd = getTimeUntilActivityEnd();
     return {
       status: 'activity' as const,
-      message: '활동 시간입니다',
+      message: timeUntilActivityEnd ? `활동 종료까지: ${timeUntilActivityEnd}` : '활동 시간입니다',
       type: 'activity'
     };
   }
