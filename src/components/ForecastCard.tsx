@@ -126,7 +126,7 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
           {next7Days.map((day, index) => (
             <motion.div 
               key={index}
-              className="flex items-center justify-between p-3 rounded-xl"
+              className="flex items-center p-3 rounded-xl"
               style={{
                 background: isDark ? 'rgba(51, 65, 85, 0.3)' : 'rgba(255, 255, 255, 0.4)',
                 backdropFilter: 'blur(12px)',
@@ -141,7 +141,8 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
             >
-              <div className="flex items-center flex-1">
+              {/* 아이콘과 요일 영역 - 고정 너비 */}
+              <div className="flex items-center w-24 flex-shrink-0">
                 <div 
                   className="w-10 h-10 mr-3 flex items-center justify-center rounded-lg shadow-md" 
                   style={{
@@ -159,28 +160,40 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
                   />
                 </div>
                 
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white">
-                    {index === 0 ? t('common.today') : format(day.date, 'EEE', { locale })}
-                  </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 capitalize">
-                    {day.description}
+                <div className="min-w-0 flex-1">
+                  <p className={`text-xs font-medium leading-tight ${(() => {
+                    const dayOfWeek = day.date.getDay(); // 0=일요일, 6=토요일
+                    if (dayOfWeek === 0) return 'text-red-500'; // 일요일
+                    if (dayOfWeek === 6) return 'text-blue-500'; // 토요일
+                    return 'text-slate-900 dark:text-white'; // 평일 & 오늘
+                  })()}`}>
+                    {index === 0 
+                      ? '오늘'
+                      : `${format(day.date, 'EEE', { locale })}(${format(day.date, 'd', { locale })})`
+                    }
                   </p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
-                {day.precipitation > 0 && (
-                  <span className="text-xs text-blue-600 dark:text-blue-400">
-                    {day.precipitation}mm
-                  </span>
-                )}
-                
-                <div className="text-right">
+              {/* 날씨 설명 영역 - 가변 너비 */}
+              <div className="flex-1 text-center px-3">
+                <p className="text-sm font-medium text-slate-900 dark:text-white">
+                  {day.description}
+                  {day.precipitation > 0 && (
+                    <span className="text-blue-600 dark:text-blue-400 ml-1">
+                      {day.precipitation}mm
+                    </span>
+                  )}
+                </p>
+              </div>
+              
+              {/* 온도 영역 - 고정 너비 */}
+              <div className="w-16 flex-shrink-0 text-right">
+                <div>
                   <span className="text-sm font-medium text-slate-900 dark:text-white">
                     {convertTemperature(day.tempMax, settings.temperatureUnit)}°
                   </span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400 ml-2">
+                  <span className="text-sm text-slate-500 dark:text-slate-400 ml-1">
                     {convertTemperature(day.tempMin, settings.temperatureUnit)}°
                   </span>
                 </div>
