@@ -3,9 +3,13 @@ import { motion } from 'framer-motion';
 import { useAppStore } from '../store/useAppStore';
 import { getCurrentTimeStatus, getNextScheduleEvent } from '../utils/schedule';
 import { Card } from './ui';
-import { Clock, Briefcase, Activity, Coffee } from 'lucide-react';
+import { Clock, Briefcase, Activity, Coffee, TestTube } from 'lucide-react';
 
-export const ScheduleCard = () => {
+interface ScheduleCardProps {
+  onTestNotification?: () => void;
+}
+
+export const ScheduleCard = ({ onTestNotification }: ScheduleCardProps) => {
   const { settings } = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -123,24 +127,65 @@ export const ScheduleCard = () => {
       
       {/* 스케줄 요약 */}
       <div className="mt-4 space-y-2 text-xs">
-        <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
-          <span className="text-slate-600 dark:text-slate-400">출근</span>
+        <div 
+          className="flex items-center justify-between p-3 rounded-lg"
+          style={{
+            background: 'rgba(255, 255, 255, 0.4)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 16px rgba(31, 38, 135, 0.2)'
+          }}
+        >
+          <span className="text-slate-600 dark:text-slate-300">출근</span>
           <span className="font-medium text-slate-900 dark:text-white">
             {settings.schedule.workStartTime} - {settings.schedule.workEndTime}
           </span>
         </div>
-        <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
-          <span className="text-slate-600 dark:text-slate-400">퇴근</span>
+        <div 
+          className="flex items-center justify-between p-3 rounded-lg"
+          style={{
+            background: 'rgba(255, 255, 255, 0.4)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 16px rgba(31, 38, 135, 0.2)'
+          }}
+        >
+          <span className="text-slate-600 dark:text-slate-300">퇴근</span>
           <span className="font-medium text-slate-900 dark:text-white">
             {settings.schedule.leaveStartTime} - {settings.schedule.leaveEndTime}
           </span>
         </div>
-        <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
-          <span className="text-slate-600 dark:text-slate-400">활동</span>
+        <div 
+          className="flex items-center justify-between p-3 rounded-lg"
+          style={{
+            background: 'rgba(255, 255, 255, 0.4)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 16px rgba(31, 38, 135, 0.2)'
+          }}
+        >
+          <span className="text-slate-600 dark:text-slate-300">활동</span>
           <span className="font-medium text-slate-900 dark:text-white">
             {settings.schedule.activityStartTime} - {settings.schedule.activityEndTime}
           </span>
         </div>
+        
+        {/* 테스트 버튼 (개발환경에서만) */}
+        {onTestNotification && !import.meta.env.PROD && (
+          <div 
+            className="flex items-center justify-center p-3 rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+            style={{
+              background: 'rgba(59, 130, 246, 0.3)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(59, 130, 246, 0.4)',
+              boxShadow: '0 4px 16px rgba(59, 130, 246, 0.2)'
+            }}
+            onClick={onTestNotification}
+          >
+            <TestTube className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" />
+            <span className="text-blue-600 dark:text-blue-400 font-medium">날씨 알림 테스트</span>
+          </div>
+        )}
       </div>
       </Card>
     </motion.div>

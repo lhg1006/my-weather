@@ -145,7 +145,7 @@ function App() {
         <ApiUsageMonitor />
         
         {/* Schedule Card */}
-        <ScheduleCard />
+        <ScheduleCard onTestNotification={testWeatherNotification} />
         
         {/* Location Button */}
         <LocationButton />
