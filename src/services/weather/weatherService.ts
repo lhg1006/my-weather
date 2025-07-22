@@ -141,7 +141,7 @@ export class WeatherService {
       const hourly: HourlyForecast[] = data.list.slice(0, 8).map((hour: any) => ({
         time: new Date(hour.dt * 1000),
         temperature: Math.round(hour.main.temp),
-        description: hour.weather[0].description,
+        description: getWeatherDescriptionInKorean(hour.weather[0].description),
         icon: hour.weather[0].icon,
         precipitation: hour.rain?.['3h'] || 0,
       }));
@@ -158,7 +158,7 @@ export class WeatherService {
             date,
             tempMax: item.main.temp_max,
             tempMin: item.main.temp_min,
-            description: item.weather[0].description,
+            description: getWeatherDescriptionInKorean(item.weather[0].description),
             icon: item.weather[0].icon,
             precipitation: item.rain?.['3h'] || 0,
             humidity: item.main.humidity,
