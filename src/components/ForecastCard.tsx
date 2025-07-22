@@ -32,7 +32,11 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
       }
     `;
     document.head.appendChild(style);
-    return () => document.head.removeChild(style);
+    return () => {
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
   }, []);
   
   const locale = settings.language === 'ko' ? ko : enUS;

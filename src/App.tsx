@@ -41,7 +41,7 @@ function App() {
 
   // 날씨 알림 시스템
   useWeatherNotifications({
-    currentWeather
+    currentWeather: currentWeather || null
   });
 
   // 앱 시작 시 위치 요청

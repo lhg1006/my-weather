@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAppStore } from '../store/useAppStore';
-import { checkWeatherAlerts, consolidateAlerts, formatAlertMessage } from '../utils/weatherNotifications';
-import { getCurrentTimeStatus } from '../utils/schedule';
+import { checkWeatherAlerts, consolidateAlerts } from '../utils/weatherNotifications';
 import toast from 'react-hot-toast';
 import type { WeatherData } from '../types';
 
@@ -12,7 +11,7 @@ interface UseWeatherNotificationsProps {
 export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificationsProps) => {
   const { settings } = useAppStore();
   const lastNotificationTime = useRef<Record<string, number>>({});
-  const checkInterval = useRef<NodeJS.Timeout | null>(null);
+  const checkInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // 중복 알림 방지를 위한 키 생성
   const getNotificationKey = (scheduleType: string, date: string) => {
@@ -80,7 +79,6 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
             alignItems: 'center',
             whiteSpace: 'nowrap',
           },
-          icon: false,
         });
       }, index * 1000); // 알림 간격을 둠
     });

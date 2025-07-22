@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store/useAppStore';
 import { convertTemperature, formatTemperature } from '../utils/temperature';
-import { formatLocationInKorean } from '../utils/locationMapping';
 import { 
   Thermometer, 
   Droplets, 

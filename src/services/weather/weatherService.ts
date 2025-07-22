@@ -5,13 +5,20 @@ import { getCityNameInKorean, getCountryNameInKorean, getWeatherDescriptionInKor
 
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
+// 환경 변수 검증
+if (!OPENWEATHER_API_KEY || OPENWEATHER_API_KEY === 'undefined' || OPENWEATHER_API_KEY === 'your_openweather_api_key_here') {
+  console.error('🚨 VITE_OPENWEATHER_API_KEY 환경 변수가 설정되지 않았거나 올바르지 않습니다!');
+  console.error('1. .env 파일이 프로젝트 루트에 있는지 확인하세요');
+  console.error('2. 파일 내용: VITE_OPENWEATHER_API_KEY=your_actual_api_key');
+  console.error('3. 개발 서버를 재시작하세요: npm run dev');
+}
+
 export class WeatherService {
   // OpenWeatherMap API
   private async fetchOpenWeatherData(lat: number, lon: number): Promise<WeatherData | null> {
     try {
       // 무료 할당량 체크
       if (!rateLimiter.canMakeCall('openweather')) {
-        const stats = rateLimiter.getUsageStats();
         const remainingTime = rateLimiter.getRemainingTime('openweather');
         toast.error(`30초마다 새로고침 가능합니다 (${remainingTime}초 후)`);
         return null;

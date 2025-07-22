@@ -23,7 +23,11 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
       }
     `;
     document.head.appendChild(style);
-    return () => document.head.removeChild(style);
+    return () => {
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
   }, []);
   
   // 모달이 열릴 때 스크롤 잠금

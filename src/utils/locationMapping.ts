@@ -108,7 +108,6 @@ export const CITY_NAME_KR: Record<string, string> = {
   'Chonju': '천안',
   'Suwŏn': '수원',
   "Ch'angwŏn": '창원',
-  'Changwon': '창원',
   
   // 추가 한국 도시들 (더 많은 시/군/구)
   'Gimcheon': '김천',
@@ -136,7 +135,6 @@ export const CITY_NAME_KR: Record<string, string> = {
   'Hongseong': '홍성',
   'Yesan': '예산',
   'Dangjin': '당진',
-  'Cheonan': '천안',
   'Jecheon': '제천',
   'Chungju': '충주',
   'Eumseong': '음성',
@@ -146,41 +144,12 @@ export const CITY_NAME_KR: Record<string, string> = {
   'Boeun': '보은',
   'Okcheon': '옥천',
   'Yeongdong': '영동',
-  'Cheonan': '천안',
-  'Hwaseong': '화성',
-  'Osan': '오산',
   'Anseong': '안성',
-  'Icheon': '이천',
-  'Yeoju': '여주',
-  'Pyeongtaek': '평택',
-  'Gwangju': '광주', // 경기도 광주
   'Gwangju-si': '광주시', // 경기도 광주시
-  'Yangpyeong': '양평',
-  'Gapyeong': '가평',
-  'Yeoncheon': '연천',
-  'Pocheon': '포천',
-  'Dongducheon': '동두천',
-  'Gwangmyeong': '광명',
-  'Gunpo': '군포',
-  'Uiwang': '의왕',
-  'Hanam': '하남',
-  'Gwacheon': '과천',
-  'Yangju': '양주',
-  'Guri': '구리',
-  'Namyangju': '남양주',
-  'Uijeongbu': '의정부',
-  'Paju': '파주',
-  'Gimpo': '김포',
-  'Siheung': '시흥',
-  'Gunsan': '군산',
   
   // 강원도 도시들
-  'Chuncheon': '춘천',
-  'Wonju': '원주',
-  'Gangneung': '강릉',
   'Donghae': '동해',
   'Taebaek': '태백',
-  'Sokcho': '속초',
   'Samcheok': '삼척',
   'Hongcheon': '홍천',
   'Hoengseong': '횡성',
@@ -229,7 +198,6 @@ export const CITY_NAME_KR: Record<string, string> = {
   'Daegu-si': '대구시',
   'Incheon-si': '인천시',
   'Daejeon-si': '대전시',
-  'Gwangju-si': '광주시',
   'Ulsan-si': '울산시',
   'New York': '뉴욕',
   'Los Angeles': '로스앤젤레스',
@@ -296,7 +264,6 @@ export const WEATHER_DESCRIPTION_KR: Record<string, string> = {
   
   // Scattered clouds
   'scattered clouds': '구름 많음',
-  'partly cloudy': '부분적으로 흐림',
   
   // Broken clouds
   'broken clouds': '흐림',

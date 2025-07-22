@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../store/useAppStore';
-import { getCurrentTimeStatus, getNextScheduleEvent } from '../utils/schedule';
+import { getCurrentTimeStatus } from '../utils/schedule';
 import { Card } from './ui';
 import { Clock, Briefcase, Activity, Coffee } from 'lucide-react';
 
@@ -24,7 +24,6 @@ export const ScheduleCard = () => {
 
   // currentTime이 변경될 때마다 재계산
   const timeStatus = getCurrentTimeStatus(settings.schedule);
-  const nextEvent = getNextScheduleEvent(settings.schedule);
 
   const getStatusIcon = () => {
     switch (timeStatus.status) {
