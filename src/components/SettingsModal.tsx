@@ -335,7 +335,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.workStartTime}
                               onChange={(e) => handleScheduleChange({ workStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                           <div>
@@ -346,7 +346,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.workEndTime}
                               onChange={(e) => handleScheduleChange({ workEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                         </div>
@@ -397,7 +397,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.leaveStartTime}
                               onChange={(e) => handleScheduleChange({ leaveStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                           <div>
@@ -408,7 +408,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.leaveEndTime}
                               onChange={(e) => handleScheduleChange({ leaveEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                         </div>
@@ -459,7 +459,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.activityStartTime}
                               onChange={(e) => handleScheduleChange({ activityStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             />
                           </div>
                           <div>
@@ -470,7 +470,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.activityEndTime}
                               onChange={(e) => handleScheduleChange({ activityEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             />
                           </div>
                         </div>
@@ -530,9 +530,9 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   {settings.weatherNotifications.enabled && (
                     <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
                       {/* 알림 타입 설정 */}
-                      <div className="space-y-3">
+                      <div className="space-y-4">
                         {/* 비/눈 알림 */}
-                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                        <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
                             <span className="text-sm text-gray-700 dark:text-gray-300">☔ 비/눈 알림</span>
                           </div>
@@ -556,7 +556,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         </div>
 
                         {/* 온도 알림 */}
-                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                        <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
                             <span className="text-sm text-gray-700 dark:text-gray-300">🌡️ 극한 온도 알림</span>
                           </div>
@@ -580,7 +580,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         </div>
 
                         {/* 바람 알림 */}
-                        <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700/30 rounded-lg">
+                        <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
                             <span className="text-sm text-gray-700 dark:text-gray-300">💨 강풍 알림</span>
                           </div>
@@ -621,7 +621,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                                 className="sr-only"
                               />
                               <div className={`
-                                flex-1 p-2 text-center rounded-ios border-2 cursor-pointer transition-all
+                                flex-1 p-3 text-center rounded-ios border-2 cursor-pointer transition-all
                                 ${settings.weatherNotifications.notifyBefore === minutes 
                                   ? 'border-ios-blue bg-ios-blue/10' 
                                   : 'border-gray-200 dark:border-gray-600'
