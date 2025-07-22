@@ -285,6 +285,94 @@ export const COUNTRY_NAME_KR: Record<string, string> = {
   'HK': '홍콩',
 };
 
+export const WEATHER_DESCRIPTION_KR: Record<string, string> = {
+  // Clear sky
+  'clear sky': '맑음',
+  'clear': '맑음',
+  
+  // Few clouds
+  'few clouds': '구름 조금',
+  'partly cloudy': '부분적으로 흐림',
+  
+  // Scattered clouds
+  'scattered clouds': '구름 많음',
+  'partly cloudy': '부분적으로 흐림',
+  
+  // Broken clouds
+  'broken clouds': '흐림',
+  'cloudy': '흐림',
+  'overcast clouds': '매우 흐림',
+  'overcast': '매우 흐림',
+  
+  // Rain
+  'light rain': '약한 비',
+  'moderate rain': '비',
+  'heavy rain': '강한 비',
+  'very heavy rain': '매우 강한 비',
+  'extreme rain': '극심한 비',
+  'freezing rain': '어는 비',
+  'light intensity shower rain': '약한 소나기',
+  'shower rain': '소나기',
+  'heavy intensity shower rain': '강한 소나기',
+  'ragged shower rain': '불규칙한 소나기',
+  
+  // Drizzle
+  'light intensity drizzle': '약한 이슬비',
+  'drizzle': '이슬비',
+  'heavy intensity drizzle': '강한 이슬비',
+  'light intensity drizzle rain': '약한 이슬비',
+  'drizzle rain': '이슬비',
+  'heavy intensity drizzle rain': '강한 이슬비',
+  'shower rain and drizzle': '소나기와 이슬비',
+  'heavy shower rain and drizzle': '강한 소나기와 이슬비',
+  'shower drizzle': '이슬비 소나기',
+  
+  // Thunderstorm
+  'thunderstorm with light rain': '약한 비를 동반한 뇌우',
+  'thunderstorm with rain': '비를 동반한 뇌우',
+  'thunderstorm with heavy rain': '강한 비를 동반한 뇌우',
+  'light thunderstorm': '약한 뇌우',
+  'thunderstorm': '뇌우',
+  'heavy thunderstorm': '강한 뇌우',
+  'ragged thunderstorm': '불규칙한 뇌우',
+  'thunderstorm with light drizzle': '약한 이슬비를 동반한 뇌우',
+  'thunderstorm with drizzle': '이슬비를 동반한 뇌우',
+  'thunderstorm with heavy drizzle': '강한 이슬비를 동반한 뇌우',
+  
+  // Snow
+  'light snow': '약한 눈',
+  'snow': '눈',
+  'heavy snow': '강한 눈',
+  'sleet': '진눈깨비',
+  'light shower sleet': '약한 진눈깨비 소나기',
+  'shower sleet': '진눈깨비 소나기',
+  'light rain and snow': '약한 비와 눈',
+  'rain and snow': '비와 눈',
+  'light shower snow': '약한 눈 소나기',
+  'shower snow': '눈 소나기',
+  'heavy shower snow': '강한 눈 소나기',
+  
+  // Atmosphere
+  'mist': '안개',
+  'smoke': '연기',
+  'haze': '실안개',
+  'sand/dust whirls': '모래/먼지 소용돌이',
+  'fog': '짙은 안개',
+  'sand': '모래',
+  'dust': '먼지',
+  'volcanic ash': '화산재',
+  'squalls': '돌풍',
+  'tornado': '토네이도',
+  
+  // Additional common descriptions
+  'sunny': '맑음',
+  'mostly sunny': '대체로 맑음',
+  'mostly cloudy': '대체로 흐림',
+  'light wind': '약한 바람',
+  'moderate wind': '보통 바람',
+  'strong wind': '강한 바람',
+};
+
 /**
  * 영어 도시명을 한국어로 변환
  */
@@ -305,6 +393,21 @@ export function getCityNameInKorean(englishName: string): string {
  */
 export function getCountryNameInKorean(countryCode: string): string {
   return COUNTRY_NAME_KR[countryCode] || countryCode;
+}
+
+/**
+ * 영어 날씨 설명을 한국어로 변환
+ */
+export function getWeatherDescriptionInKorean(englishDescription: string): string {
+  const koreanDescription = WEATHER_DESCRIPTION_KR[englishDescription.toLowerCase()];
+  
+  // 매핑되지 않은 날씨 설명 디버깅
+  if (!koreanDescription) {
+    console.warn(`🌤️ 한국어 매핑이 없는 날씨 설명: "${englishDescription}"`);
+    console.log('💡 이 날씨 설명을 한국어로 추가하려면 locationMapping.ts에 추가하세요');
+  }
+  
+  return koreanDescription || englishDescription;
 }
 
 /**

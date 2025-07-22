@@ -1,7 +1,7 @@
 import type { WeatherData, HourlyForecast, DailyForecast } from '../../types';
 import { rateLimiter } from './rateLimiter';
 import toast from 'react-hot-toast';
-import { getCityNameInKorean, getCountryNameInKorean } from '../../utils/locationMapping';
+import { getCityNameInKorean, getCountryNameInKorean, getWeatherDescriptionInKorean } from '../../utils/locationMapping';
 
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -46,7 +46,7 @@ export class WeatherService {
         visibility: data.visibility / 1000, // meters to km
         uvIndex: 0, // OpenWeather free tier doesn't include UV
         feelsLike: Math.round(data.main.feels_like),
-        description: data.weather[0].description,
+        description: getWeatherDescriptionInKorean(data.weather[0].description),
         icon: data.weather[0].icon,
         location: {
           latitude: lat,
@@ -68,7 +68,7 @@ export class WeatherService {
         visibility: data.visibility / 1000,
         uvIndex: 0,
         feelsLike: Math.round(data.main.feels_like),
-        description: data.weather[0].description,
+        description: getWeatherDescriptionInKorean(data.weather[0].description),
         icon: data.weather[0].icon,
         location: {
           latitude: lat,
@@ -84,6 +84,10 @@ export class WeatherService {
       console.log('🌏 위치 변환 결과:', {
         원본: `${data.name}, ${data.sys.country}`,
         변환후: `${getCityNameInKorean(data.name)}, ${getCountryNameInKorean(data.sys.country)}`
+      });
+      console.log('🌤️ 날씨 설명 번역:', {
+        원본: data.weather[0].description,
+        변환후: getWeatherDescriptionInKorean(data.weather[0].description)
       });
       
       return finalData;
