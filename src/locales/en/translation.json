@@ -76,6 +76,9 @@
     "30minutesBefore": "30 min before",
     "60minutesBefore": "60 min before",
     "notificationSettings": "Notification Settings",
+    "workShort": "W",
+    "leaveShort": "L",
+    "activityShort": "A",
     "save": "Save",
     "cancel": "Cancel"
   },

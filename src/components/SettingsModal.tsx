@@ -299,7 +299,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center">
                             <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-white text-xs font-bold">출</span>
+                              <span className="text-white text-xs font-bold">{t('settings.workShort')}</span>
                             </div>
                             <label className="text-sm font-medium text-gray-700 dark:text-white">
                               {t('settings.workTimeRange')}
@@ -361,7 +361,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center">
                             <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-white text-xs font-bold">퇴</span>
+                              <span className="text-white text-xs font-bold">{t('settings.leaveShort')}</span>
                             </div>
                             <label className="text-sm font-medium text-gray-700 dark:text-white">
                               {t('settings.leaveTimeRange')}
@@ -423,7 +423,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center">
                             <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-white text-xs font-bold">활</span>
+                              <span className="text-white text-xs font-bold">{t('settings.activityShort')}</span>
                             </div>
                             <label className="text-sm font-medium text-gray-700 dark:text-white">
                               {t('settings.activityTime')}
