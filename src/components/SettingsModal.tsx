@@ -422,7 +422,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               <span className="text-white text-xs font-bold">활</span>
                             </div>
                             <label className="text-sm font-medium text-gray-700 dark:text-white">
-                              활동 시간
+                              {t('settings.activityTime')}
                             </label>
                           </div>
                           <div className="flex items-center space-x-2">
@@ -480,7 +480,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                       <div className="mt-4">
                         <button className="w-full bg-ios-blue hover:bg-ios-blue/90 text-white font-medium py-3 px-4 rounded-ios transition-colors flex items-center justify-center space-x-2">
                           <Bell className="w-4 h-4" />
-                          <span>알림 설정</span>
+                          <span>{t('settings.notificationSettings')}</span>
                         </button>
                       </div>
                     </div>
@@ -493,7 +493,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                     <div className="flex items-center">
                       <CloudRain className="w-5 h-5 text-ios-blue mr-2" />
                       <h3 className="text-sm font-medium text-gray-700 dark:text-white">
-                        날씨 알림
+                        {t('settings.weatherNotifications')}
                       </h3>
                     </div>
                   </div>
@@ -502,10 +502,10 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600 mb-4">
                     <div>
                       <p className="text-sm font-medium text-gray-700 dark:text-white">
-                        날씨 알림 사용
+                        {t('settings.enableWeatherNotifications')}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                        스케줄 시간 전에 날씨 상황을 알려드립니다
+                        {t('settings.weatherNotificationsDesc')}
                       </p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
@@ -534,7 +534,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         {/* 비/눈 알림 */}
                         <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
-                            <span className="text-sm text-gray-800 dark:text-gray-300">☔ 비/눈 알림</span>
+                            <span className="text-sm text-gray-800 dark:text-gray-300">☔ {t('settings.rainAlerts')}</span>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -558,7 +558,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         {/* 온도 알림 */}
                         <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
-                            <span className="text-sm text-gray-800 dark:text-gray-300">🌡️ 극한 온도 알림</span>
+                            <span className="text-sm text-gray-800 dark:text-gray-300">🌡️ {t('settings.temperatureAlerts')}</span>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -582,7 +582,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         {/* 바람 알림 */}
                         <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
-                            <span className="text-sm text-gray-800 dark:text-gray-300">💨 강풍 알림</span>
+                            <span className="text-sm text-gray-800 dark:text-gray-300">💨 {t('settings.windAlerts')}</span>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -607,7 +607,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                       {/* 알림 타이밍 설정 */}
                       <div>
                         <label className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-2">
-                          알림 시간 (몇 분 전)
+                          {t('settings.notificationTiming')}
                         </label>
                         
                         <div className="grid grid-cols-3 gap-2">
@@ -628,7 +628,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                                 }
                               `}>
                                 <span className="text-xs font-medium text-gray-700 dark:text-white">
-                                  {minutes}분 전
+                                  {t(`settings.${minutes}minutesBefore`)}
                                 </span>
                               </div>
                             </label>
