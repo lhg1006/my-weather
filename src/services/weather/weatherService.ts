@@ -28,6 +28,15 @@ export class WeatherService {
       
       const data = await response.json();
       
+      // 디버깅: 원본 API 응답 데이터 확인
+      console.log('🌍 OpenWeatherMap 원본 API 응답:', data);
+      console.log('📍 위치 정보:', {
+        원본_도시명: data.name,
+        원본_국가코드: data.sys.country,
+        좌표: { lat: data.coord?.lat, lon: data.coord?.lon },
+        전달받은_좌표: { lat, lon }
+      });
+      
       return {
         temperature: Math.round(data.main.temp),
         humidity: data.main.humidity,
@@ -48,6 +57,36 @@ export class WeatherService {
         },
         timestamp: new Date(),
       };
+      
+      // 디버깅: 변환된 최종 데이터 확인
+      const finalData = {
+        temperature: Math.round(data.main.temp),
+        humidity: data.main.humidity,
+        precipitation: data.rain?.['1h'] || 0,
+        windSpeed: Math.round(data.wind.speed * 3.6),
+        pressure: data.main.pressure,
+        visibility: data.visibility / 1000,
+        uvIndex: 0,
+        feelsLike: Math.round(data.main.feels_like),
+        description: data.weather[0].description,
+        icon: data.weather[0].icon,
+        location: {
+          latitude: lat,
+          longitude: lon,
+          city: getCityNameInKorean(data.name),
+          country: getCountryNameInKorean(data.sys.country),
+          timezone: 'UTC',
+        },
+        timestamp: new Date(),
+      };
+      
+      console.log('🔄 변환된 최종 WeatherData:', finalData);
+      console.log('🌏 위치 변환 결과:', {
+        원본: `${data.name}, ${data.sys.country}`,
+        변환후: `${getCityNameInKorean(data.name)}, ${getCountryNameInKorean(data.sys.country)}`
+      });
+      
+      return finalData;
     } catch (error) {
       console.error('OpenWeather API error:', error);
       return null;
