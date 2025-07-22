@@ -100,7 +100,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
           >
             <Card className="flex flex-col h-full min-h-0">
               <div className="flex items-center justify-between p-6 pb-4 flex-shrink-0 border-b border-slate-200 dark:border-slate-600">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-gray-700 dark:text-white">
                   {t('settings.title')}
                 </h2>
                 <Button
@@ -125,7 +125,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 <div>
                   <div className="flex items-center mb-3 mt-2">
                     <Globe className="w-5 h-5 text-ios-blue mr-2" />
-                    <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-white">
                       {t('settings.language')}
                     </h3>
                   </div>
@@ -146,7 +146,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                           : 'border-gray-200 dark:border-gray-600'
                         }
                       `}>
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">
+                        <span className="text-sm font-medium text-gray-700 dark:text-white">
                           {t('settings.korean')}
                         </span>
                       </div>
@@ -167,7 +167,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                           : 'border-gray-200 dark:border-gray-600'
                         }
                       `}>
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">
+                        <span className="text-sm font-medium text-gray-700 dark:text-white">
                           {t('settings.english')}
                         </span>
                       </div>
@@ -179,7 +179,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 <div>
                   <div className="flex items-center mb-3 mt-6">
                     <Palette className="w-5 h-5 text-ios-blue mr-2" />
-                    <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-white">
                       {t('settings.theme')}
                     </h3>
                   </div>
@@ -201,7 +201,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             : 'border-gray-200 dark:border-gray-600'
                           }
                         `}>
-                          <span className="text-xs font-medium text-gray-900 dark:text-white">
+                          <span className="text-xs font-medium text-gray-700 dark:text-white">
                             {t(`settings.${theme}Mode`)}
                           </span>
                         </div>
@@ -214,7 +214,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                 <div>
                   <div className="flex items-center mb-3 mt-6">
                     <Thermometer className="w-5 h-5 text-ios-blue mr-2" />
-                    <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-white">
                       {t('settings.units')}
                     </h3>
                   </div>
@@ -236,7 +236,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             : 'border-gray-200 dark:border-gray-600'
                           }
                         `}>
-                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                          <span className="text-sm font-medium text-gray-700 dark:text-white">
                             {t(`settings.${unit}`)}
                           </span>
                         </div>
@@ -250,7 +250,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   <div className="flex items-center justify-between mb-3 mt-6">
                     <div className="flex items-center">
                       <Clock className="w-5 h-5 text-ios-blue mr-2" />
-                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                      <h3 className="text-sm font-medium text-gray-700 dark:text-white">
                         {t('settings.schedule')}
                       </h3>
                     </div>
@@ -262,7 +262,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   {/* 스케줄 기능 활성화 */}
                   <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600 mb-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      <p className="text-sm font-medium text-gray-700 dark:text-white">
                         {t('settings.enableSchedule')}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -297,7 +297,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
                               <span className="text-white text-xs font-bold">출</span>
                             </div>
-                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                            <label className="text-sm font-medium text-gray-700 dark:text-white">
                               {t('settings.workTimeRange')}
                             </label>
                           </div>
@@ -335,7 +335,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.workStartTime}
                               onChange={(e) => handleScheduleChange({ workStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                           <div>
@@ -346,7 +346,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.workEndTime}
                               onChange={(e) => handleScheduleChange({ workEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                         </div>
@@ -359,7 +359,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
                               <span className="text-white text-xs font-bold">퇴</span>
                             </div>
-                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                            <label className="text-sm font-medium text-gray-700 dark:text-white">
                               {t('settings.leaveTimeRange')}
                             </label>
                           </div>
@@ -397,7 +397,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.leaveStartTime}
                               onChange={(e) => handleScheduleChange({ leaveStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                           <div>
@@ -408,7 +408,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.leaveEndTime}
                               onChange={(e) => handleScheduleChange({ leaveEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                         </div>
@@ -421,7 +421,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                             <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2">
                               <span className="text-white text-xs font-bold">활</span>
                             </div>
-                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                            <label className="text-sm font-medium text-gray-700 dark:text-white">
                               활동 시간
                             </label>
                           </div>
@@ -459,7 +459,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.activityStartTime}
                               onChange={(e) => handleScheduleChange({ activityStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             />
                           </div>
                           <div>
@@ -470,7 +470,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.activityEndTime}
                               onChange={(e) => handleScheduleChange({ activityEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                             />
                           </div>
                         </div>
@@ -492,7 +492,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   <div className="flex items-center justify-between mb-3 mt-6">
                     <div className="flex items-center">
                       <CloudRain className="w-5 h-5 text-ios-blue mr-2" />
-                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                      <h3 className="text-sm font-medium text-gray-700 dark:text-white">
                         날씨 알림
                       </h3>
                     </div>
@@ -501,7 +501,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   {/* 날씨 알림 기능 활성화 */}
                   <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600 mb-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      <p className="text-sm font-medium text-gray-700 dark:text-white">
                         날씨 알림 사용
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -534,7 +534,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         {/* 비/눈 알림 */}
                         <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
-                            <span className="text-sm text-gray-700 dark:text-gray-300">☔ 비/눈 알림</span>
+                            <span className="text-sm text-gray-800 dark:text-gray-300">☔ 비/눈 알림</span>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -558,7 +558,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         {/* 온도 알림 */}
                         <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
-                            <span className="text-sm text-gray-700 dark:text-gray-300">🌡️ 극한 온도 알림</span>
+                            <span className="text-sm text-gray-800 dark:text-gray-300">🌡️ 극한 온도 알림</span>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -582,7 +582,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         {/* 바람 알림 */}
                         <div className="flex items-center justify-between p-3 border-2 rounded-ios border-gray-200 dark:border-gray-600">
                           <div className="flex items-center">
-                            <span className="text-sm text-gray-700 dark:text-gray-300">💨 강풍 알림</span>
+                            <span className="text-sm text-gray-800 dark:text-gray-300">💨 강풍 알림</span>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer">
                             <input
@@ -606,7 +606,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
 
                       {/* 알림 타이밍 설정 */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-2">
                           알림 시간 (몇 분 전)
                         </label>
                         
@@ -627,7 +627,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                                   : 'border-gray-200 dark:border-gray-600'
                                 }
                               `}>
-                                <span className="text-xs font-medium text-gray-900 dark:text-white">
+                                <span className="text-xs font-medium text-gray-700 dark:text-white">
                                   {minutes}분 전
                                 </span>
                               </div>
