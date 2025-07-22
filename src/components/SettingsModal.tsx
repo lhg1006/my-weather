@@ -609,15 +609,31 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           알림 시간 (몇 분 전)
                         </label>
-                        <select
-                          value={settings.weatherNotifications.notifyBefore}
-                          onChange={(e) => handleWeatherNotificationChange({ notifyBefore: parseInt(e.target.value) })}
-                          className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-ios-blue focus:border-ios-blue"
-                        >
-                          <option value={15}>15분 전</option>
-                          <option value={30}>30분 전</option>
-                          <option value={60}>60분 전</option>
-                        </select>
+                        
+                        <div className="grid grid-cols-3 gap-2">
+                          {[15, 30, 60].map((minutes) => (
+                            <label key={minutes} className="flex items-center">
+                              <input
+                                type="radio"
+                                name="notifyBefore"
+                                checked={settings.weatherNotifications.notifyBefore === minutes}
+                                onChange={() => handleWeatherNotificationChange({ notifyBefore: minutes })}
+                                className="sr-only"
+                              />
+                              <div className={`
+                                flex-1 p-2 text-center rounded-ios border-2 cursor-pointer transition-all
+                                ${settings.weatherNotifications.notifyBefore === minutes 
+                                  ? 'border-ios-blue bg-ios-blue/10' 
+                                  : 'border-gray-200 dark:border-gray-600'
+                                }
+                              `}>
+                                <span className="text-xs font-medium text-gray-900 dark:text-white">
+                                  {minutes}분 전
+                                </span>
+                              </div>
+                            </label>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
