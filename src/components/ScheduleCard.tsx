@@ -86,28 +86,31 @@ export const ScheduleCard = ({ onTestNotification }: ScheduleCardProps) => {
       }}
     >
       <Card variant="glass" className="mb-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
+      <div className="flex items-center">
+        {/* 아이콘 영역 - 고정 너비 */}
+        <div className="w-12 flex-shrink-0">
           <div className={`p-2 rounded-lg ${getStatusBg()}`}>
             <div className={getStatusColor()}>
               {getStatusIcon()}
             </div>
           </div>
-          
-          <div>
-            <h3 className="text-sm font-medium text-slate-900 dark:text-white">
-              {timeStatus.message || '스케줄 활성화됨'}
-            </h3>
-            
-            {timeStatus.timeUntil && (
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {timeStatus.timeUntil}
-              </p>
-            )}
-          </div>
         </div>
         
-        <div className="text-right">
+        {/* 텍스트 영역 - 가변 너비 */}
+        <div className="flex-1 min-w-0 px-3">
+          <h3 className="text-sm font-medium text-slate-900 dark:text-white truncate">
+            {timeStatus.message || '스케줄 활성화됨'}
+          </h3>
+          
+          {timeStatus.timeUntil && (
+            <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+              {timeStatus.timeUntil}
+            </p>
+          )}
+        </div>
+        
+        {/* 시간 영역 - 고정 너비 */}
+        <div className="w-16 flex-shrink-0 text-right">
           <div className="text-sm font-medium text-slate-900 dark:text-white">
             {currentTime.toLocaleTimeString('ko-KR', { 
               hour: '2-digit', 
