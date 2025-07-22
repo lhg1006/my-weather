@@ -106,7 +106,7 @@ function App() {
             </div>
             <div>
               <h1 className="text-xl font-semibold text-slate-900 dark:text-white">
-                마이웨더
+                MyWeather
               </h1>
               <p className="text-sm text-slate-600 dark:text-slate-300">
                 내 위치 날씨 정보
