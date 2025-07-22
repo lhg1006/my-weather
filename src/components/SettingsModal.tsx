@@ -13,6 +13,18 @@ interface SettingsModalProps {
 export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
   const { t, i18n } = useTranslation();
   const { settings, updateSettings } = useAppStore();
+
+  // 스크롤바 숨기기 위한 스타일
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
   
   // 모달이 열릴 때 스크롤 잠금
   useEffect(() => {
@@ -96,7 +108,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
               </div>
 
               <div 
-                className="flex-1 overflow-y-auto px-6 py-4 min-h-0 [&::-webkit-scrollbar]:hidden" 
+                className="flex-1 overflow-y-scroll px-6 py-4 min-h-0 hide-scrollbar" 
                 style={{
                   scrollbarWidth: 'none',
                   msOverflowStyle: 'none'

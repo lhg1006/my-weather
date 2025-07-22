@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store/useAppStore';
 import { convertTemperature, formatTemperature } from '../utils/temperature';
+import { formatLocationInKorean } from '../utils/locationMapping';
 import { 
   Thermometer, 
   Droplets, 
@@ -111,7 +112,10 @@ export const WeatherCard = ({ weather }: WeatherCardProps) => {
         </div>
         
         <h2 className="text-xl font-medium text-slate-900 dark:text-white mb-2">
-          {weather.location.city}, {weather.location.country}
+          {weather.location.country === '한국' 
+            ? weather.location.city 
+            : `${weather.location.city}, ${weather.location.country}`
+          }
         </h2>
         
         <p className="text-slate-600 dark:text-slate-300 mb-6 capitalize">

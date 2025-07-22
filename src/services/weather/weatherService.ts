@@ -1,6 +1,7 @@
 import type { WeatherData, HourlyForecast, DailyForecast } from '../../types';
 import { rateLimiter } from './rateLimiter';
 import toast from 'react-hot-toast';
+import { getCityNameInKorean, getCountryNameInKorean } from '../../utils/locationMapping';
 
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -41,8 +42,8 @@ export class WeatherService {
         location: {
           latitude: lat,
           longitude: lon,
-          city: data.name,
-          country: data.sys.country,
+          city: getCityNameInKorean(data.name),
+          country: getCountryNameInKorean(data.sys.country),
           timezone: 'UTC', // OpenWeather free tier doesn't include timezone
         },
         timestamp: new Date(),
