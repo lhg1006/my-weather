@@ -33,6 +33,64 @@ export const CITY_NAME_KR: Record<string, string> = {
   'Chuncheon': '춘천',
   'Wonju': '원주',
   
+  // 추가 한국 도시들
+  'Hwaseong': '화성',
+  'Seongnam': '성남',
+  'Gimpo': '김포',
+  'Pyeongtaek': '평택',
+  'Hwaseong-si': '화성시',
+  'Seongnam-si': '성남시',
+  'Gimpo-si': '김포시',
+  'Pyeongtaek-si': '평택시',
+  'Gwacheon': '과천',
+  'Hanam': '하남',
+  'Osan': '오산',
+  'Gunpo': '군포',
+  'Icheon': '이천',
+  'Yangju': '양주',
+  'Guri': '구리',
+  'Uiwang': '의왕',
+  'Pocheon': '포천',
+  'Dongducheon': '동두천',
+  'Gwangmyeong': '광명',
+  'Yeoju': '여주',
+  'Yangpyeong': '양평',
+  'Gapyeong': '가평',
+  'Yeoncheon': '연천',
+  
+  // 광역시/도 단위
+  'Gyeonggi': '경기도',
+  'Gyeonggi-do': '경기도',
+  'Gangwon': '강원도',
+  'Gangwon-do': '강원도',
+  'Chungcheong': '충청도',
+  'Chungcheongbuk': '충청북도',
+  'Chungcheongnam': '충청남도',
+  'Jeolla': '전라도',
+  'Jeollabuk': '전라북도',
+  'Jeollanam': '전라남도',
+  'Gyeongsang': '경상도',
+  'Gyeongsangbuk': '경상북도',
+  'Gyeongsangnam': '경상남도',
+  
+  // 구/군 단위 (일부)
+  'Songpa': '송파구',
+  'Gangnam': '강남구',
+  'Seocho': '서초구',
+  'Mapo': '마포구',
+  'Yongsan': '용산구',
+  'Jung': '중구',
+  'Jongno': '종로구',
+  'Seodaemun': '서대문구',
+  'Eunpyeong': '은평구',
+  'Dobong': '도봉구',
+  'Nowon': '노원구',
+  'Dongdaemun': '동대문구',
+  'Jungnang': '중랑구',
+  'Seongdong': '성동구',
+  'Gwangjin': '광진구',
+  'Gangdong': '강동구',
+  
   // 주요 국제 도시들
   'New York': '뉴욕',
   'Los Angeles': '로스앤젤레스',
@@ -92,7 +150,15 @@ export const COUNTRY_NAME_KR: Record<string, string> = {
  * 영어 도시명을 한국어로 변환
  */
 export function getCityNameInKorean(englishName: string): string {
-  return CITY_NAME_KR[englishName] || englishName;
+  const koreanName = CITY_NAME_KR[englishName];
+  
+  // 매핑되지 않은 도시명 디버깅
+  if (!koreanName) {
+    console.warn(`🗺️ 한국어 매핑이 없는 도시: "${englishName}"`);
+    console.log('💡 이 도시를 한국어로 추가하려면 locationMapping.ts에 추가하세요');
+  }
+  
+  return koreanName || englishName;
 }
 
 /**
