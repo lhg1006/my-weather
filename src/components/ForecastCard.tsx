@@ -55,7 +55,7 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
       }}
     >
       {/* 시간별 예보 */}
-      <Card>
+      <Card variant="glass">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           {t('weather.hourlyForecast')}
         </h3>
@@ -65,7 +65,13 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
             {next24Hours.map((hour, index) => (
               <motion.div 
                 key={index}
-                className="flex-shrink-0 text-center p-3 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-xl min-w-[80px] border border-white/30 dark:border-slate-600/30"
+                className="flex-shrink-0 text-center p-3 rounded-xl min-w-[80px]"
+                style={{
+                  background: isDark ? 'rgba(51, 65, 85, 0.3)' : 'rgba(255, 255, 255, 0.4)',
+                  backdropFilter: 'blur(12px)',
+                  border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.3)',
+                  boxShadow: isDark ? '0 4px 16px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(31, 38, 135, 0.2)'
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
@@ -81,8 +87,8 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
                 <div 
                   className="w-10 h-10 mx-auto mb-2 flex items-center justify-center rounded-lg shadow-md" 
                   style={{
-                    backgroundColor: isDark ? 'rgb(71 85 105 / 80%)' : 'rgb(0 122 255 / 60%)', 
-                    border: isDark ? '1px solid rgb(51 65 85)' : '1px solid rgb(0 122 255 / 30%)'
+                    backgroundColor: isDark ? 'rgb(54 114 199 / 80%)' : 'rgb(0 122 255 / 60%)', 
+                    border: isDark ? '1px solid rgb(54 114 199 / 50%)' : '1px solid rgb(0 122 255 / 30%)'
                   }}
                 >
                   <img 
@@ -111,7 +117,7 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
       </Card>
 
       {/* 주간 예보 */}
-      <Card>
+      <Card variant="glass">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           {t('weather.weeklyForecast')}
         </h3>
@@ -120,7 +126,13 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
           {next7Days.map((day, index) => (
             <motion.div 
               key={index}
-              className="flex items-center justify-between p-3 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-xl border border-white/30 dark:border-slate-600/30"
+              className="flex items-center justify-between p-3 rounded-xl"
+              style={{
+                background: isDark ? 'rgba(51, 65, 85, 0.3)' : 'rgba(255, 255, 255, 0.4)',
+                backdropFilter: 'blur(12px)',
+                border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.3)',
+                boxShadow: isDark ? '0 4px 16px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(31, 38, 135, 0.2)'
+              }}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ 
@@ -133,8 +145,8 @@ export const ForecastCard = ({ hourly, daily }: ForecastCardProps) => {
                 <div 
                   className="w-10 h-10 mr-3 flex items-center justify-center rounded-lg shadow-md" 
                   style={{
-                    backgroundColor: isDark ? 'rgb(71 85 105 / 80%)' : 'rgb(0 122 255 / 60%)', 
-                    border: isDark ? '1px solid rgb(51 65 85)' : '1px solid rgb(0 122 255 / 30%)'
+                    backgroundColor: isDark ? 'rgb(54 114 199 / 80%)' : 'rgb(0 122 255 / 60%)', 
+                    border: isDark ? '1px solid rgb(54 114 199 / 50%)' : '1px solid rgb(0 122 255 / 30%)'
                   }}
                 >
                   <img 

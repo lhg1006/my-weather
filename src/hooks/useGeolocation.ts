@@ -125,10 +125,24 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
   };
 
   // 컴포넌트 마운트 시 자동으로 위치 가져오기 (선택적)
-  const requestLocation = () => {
-    getCurrentPosition().catch((error) => {
+  const requestLocation = async () => {
+    // 30초 간격 제한 체크
+    const { rateLimiter } = await import('../services/weather/rateLimiter');
+    const toast = (await import('react-hot-toast')).default;
+    
+    if (!rateLimiter.canMakeCall('openweather')) {
+      const remainingTime = rateLimiter.getRemainingTime('openweather');
+      toast.error(`30초마다 위치 요청 가능합니다 (${remainingTime}초 후)`);
+      return;
+    }
+
+    try {
+      await getCurrentPosition();
+      // 위치 요청 성공 시 API 호출로 간주하여 기록
+      rateLimiter.recordCall('openweather');
+    } catch (error) {
       console.error('Failed to get location:', error);
-    });
+    }
   };
 
   // 위치 권한 상태 확인

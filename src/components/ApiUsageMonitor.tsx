@@ -52,7 +52,7 @@ export const ApiUsageMonitor = () => {
   }
 
   return (
-    <Card className={`mb-6 ${hasHighUsage ? 'border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-900/20' : ''}`}>
+    <Card variant="glass" className={`mb-6 ${hasHighUsage ? 'border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-900/20' : ''}`}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Shield className="w-5 h-5 text-blue-600" />

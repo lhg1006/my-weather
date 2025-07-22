@@ -96,7 +96,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-300 via-sky-200 to-blue-200 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100 transition-all duration-500">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white/70 dark:bg-slate-800/90 backdrop-blur-md border-b border-sky-300/30 dark:border-slate-700 shadow-lg shadow-sky-200/20 dark:shadow-slate-900/50 transition-all duration-300">
+      <header className="sticky top-0 z-40 bg-white/60 dark:bg-slate-800/70 backdrop-blur-xl border-b border-sky-300/20 dark:border-slate-600/30 shadow-xl shadow-sky-200/30 dark:shadow-slate-900/60 transition-all duration-300">
         <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-xl font-semibold text-slate-900 dark:text-white">
@@ -233,11 +233,15 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
-            background: 'var(--color-surface)',
-            color: 'var(--color-text-primary)',
-            borderRadius: '10px',
-            border: '1px solid var(--color-border)',
+            marginTop: '80px',
+            background: 'rgba(255, 255, 255, 0.85)',
+            color: '#1e293b',
+            borderRadius: '12px',
+            border: '1px solid rgba(148, 163, 184, 0.3)',
+            backdropFilter: 'blur(12px)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
           },
+          className: 'dark:!bg-slate-800/85 dark:!text-slate-100 dark:!border-slate-600/30',
         }}
       />
     </div>

@@ -80,7 +80,7 @@ export const ScheduleCard = () => {
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
     >
-      <Card className="mb-4">
+      <Card variant="glass" className="mb-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className={`p-2 rounded-lg ${getStatusBg()}`}>

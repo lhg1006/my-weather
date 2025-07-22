@@ -84,15 +84,15 @@ export const WeatherCard = ({ weather }: WeatherCardProps) => {
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
     >
-      <Card className="mb-6">
+      <Card variant="glass" className="mb-6">
       <div className="text-center">
         <div className="flex flex-col items-center justify-center mb-4">
           {/* 메인 날씨 아이콘 */}
           <div 
             className="w-20 h-20 mb-4 flex items-center justify-center rounded-2xl shadow-lg" 
             style={{
-              backgroundColor: isDark ? 'rgb(71 85 105 / 80%)' : 'rgb(0 122 255 / 60%)', 
-              border: isDark ? '1px solid rgb(51 65 85)' : '1px solid rgb(0 122 255 / 30%)'
+              backgroundColor: isDark ? 'rgb(54 114 199 / 80%)' : 'rgb(0 122 255 / 60%)', 
+              border: isDark ? '1px solid rgb(54 114 199 / 50%)' : '1px solid rgb(0 122 255 / 30%)'
             }}
           >
             <img 
@@ -122,7 +122,13 @@ export const WeatherCard = ({ weather }: WeatherCardProps) => {
           {weatherDetails.map((detail, index) => (
             <motion.div 
               key={index}
-              className="flex items-center p-3 bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-xl border border-white/30 dark:border-slate-600/30"
+              className="flex items-center p-3 rounded-xl"
+              style={{
+                background: isDark ? 'rgba(51, 65, 85, 0.3)' : 'rgba(255, 255, 255, 0.4)',
+                backdropFilter: 'blur(12px)',
+                border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.3)',
+                boxShadow: isDark ? '0 4px 16px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(31, 38, 135, 0.2)'
+              }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ 
@@ -134,7 +140,7 @@ export const WeatherCard = ({ weather }: WeatherCardProps) => {
               <div 
                 className="mr-3 w-8 h-8 flex items-center justify-center rounded-lg" 
                 style={{
-                  backgroundColor: isDark ? 'rgb(71 85 105 / 80%)' : 'rgb(0 122 255 / 60%)'
+                  backgroundColor: isDark ? 'rgb(54 114 199 / 80%)' : 'rgb(0 122 255 / 60%)'
                 }}
               >
                 <div className="text-white">
