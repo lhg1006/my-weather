@@ -67,25 +67,51 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
     return {
       status: 'canWork' as const,
       message: '출근 시간',
-      timeUntil: timeUntilLeave ? `퇴근까지: ${timeUntilLeave}` : null,
+      timeUntil: timeUntilLeave ? `${timeUntilLeave} 퇴근` : null,
       type: 'work'
     };
   }
   
   if (canLeave) {
+    const timeUntilWork = getTimeUntilWork();
     return {
       status: 'canLeave' as const,
       message: '퇴근 시간',
-      timeUntil: null,
+      timeUntil: timeUntilWork ? `${timeUntilWork} 출근` : null,
       type: 'work'
     };
   }
   
   if (isActivityTime) {
+    // 활동 시간에는 다음 출근 또는 퇴근 시간 중 더 가까운 것을 표시
+    const timeUntilWork = getTimeUntilWork();
+    const timeUntilLeave = getTimeUntilLeave();
+    
+    let nextTimeUntil = null;
+    if (timeUntilWork && timeUntilLeave) {
+      // 둘 다 있으면 더 가까운 것 선택 (분 단위로 비교)
+      const workMinutes = convertToMinutes(schedule.workStartTime!) - currentMinutes;
+      const leaveMinutes = convertToMinutes(schedule.leaveStartTime!) - currentMinutes;
+      
+      // 음수면 다음날로 계산
+      const adjustedWorkMinutes = workMinutes <= 0 ? (24 * 60) + workMinutes : workMinutes;
+      const adjustedLeaveMinutes = leaveMinutes <= 0 ? (24 * 60) + leaveMinutes : leaveMinutes;
+      
+      if (adjustedWorkMinutes <= adjustedLeaveMinutes) {
+        nextTimeUntil = `${timeUntilWork} 출근`;
+      } else {
+        nextTimeUntil = `${timeUntilLeave} 퇴근`;
+      }
+    } else if (timeUntilWork) {
+      nextTimeUntil = `${timeUntilWork} 출근`;
+    } else if (timeUntilLeave) {
+      nextTimeUntil = `${timeUntilLeave} 퇴근`;
+    }
+    
     return {
       status: 'activity' as const,
       message: '활동 시간',
-      timeUntil: null,
+      timeUntil: nextTimeUntil,
       type: 'activity'
     };
   }
@@ -95,7 +121,7 @@ export const getCurrentTimeStatus = (schedule: ScheduleSettings) => {
   return {
     status: 'rest' as const,
     message: '휴식 시간',
-    timeUntil: timeUntilWork ? `출근까지: ${timeUntilWork}` : null,
+    timeUntil: timeUntilWork ? `${timeUntilWork} 출근` : null,
     type: 'rest'
   };
 };
