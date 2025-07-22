@@ -44,14 +44,14 @@ export const checkWeatherAlerts = (weather: WeatherData): WeatherAlert[] => {
     alerts.push({
       type: 'cold',
       message: `매우 추운 날씨입니다! 따뜻하게 입고 나가세요 (${weather.temperature}°C)`,
-      icon: '🧥',
+      icon: '❄',
       severity: 'high'
     });
   } else if (weather.temperature <= 5) {
     alerts.push({
       type: 'cold',
       message: `쌀쌀한 날씨입니다! 겉옷을 챙기세요 (${weather.temperature}°C)`,
-      icon: '🧧',
+      icon: '🌡',
       severity: 'medium'
     });
   }

@@ -66,7 +66,7 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
     
     consolidatedAlerts.forEach((alert, index) => {
       setTimeout(() => {
-        toast(formatAlertMessage(alert), {
+        toast(alert.message, {
           duration: 5000,
           position: 'top-center',
           style: {
@@ -74,8 +74,13 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
                        alert.severity === 'medium' ? '#f97316' : '#3b82f6',
             color: 'white',
             fontWeight: '500',
+            lineHeight: '1.4',
+            minHeight: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            whiteSpace: 'nowrap',
           },
-          icon: alert.icon,
+          icon: false,
         });
       }, index * 1000); // 알림 간격을 둠
     });
@@ -163,7 +168,7 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
         
         consolidatedAlerts.forEach((alert, index) => {
           setTimeout(() => {
-            toast(formatAlertMessage(alert), {
+            toast(alert.message, {
               duration: 4000,
               position: 'top-center',
               style: {
@@ -172,8 +177,13 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
                 color: 'white',
                 fontWeight: '500',
                 backdropFilter: 'blur(10px)',
+                lineHeight: '1.4',
+                minHeight: '48px',
+                display: 'flex',
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
               },
-              icon: alert.icon,
+              icon: false,
             });
           }, index * 1000);
         });
