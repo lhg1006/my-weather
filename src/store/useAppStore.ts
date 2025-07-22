@@ -42,6 +42,9 @@ const defaultSettings: AppSettings = {
     activityStartTime: '06:00',
     activityEndTime: '22:00',
     enabled: false,
+    workNotificationEnabled: false,
+    leaveNotificationEnabled: false,
+    activityNotificationEnabled: false,
   },
 };
 

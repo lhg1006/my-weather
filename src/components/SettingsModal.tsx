@@ -286,13 +286,35 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                     <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
                       {/* 출근 가능 시간 */}
                       <div>
-                        <div className="flex items-center mb-2">
-                          <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
-                            <span className="text-white text-xs font-bold">출</span>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center">
+                            <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
+                              <span className="text-white text-xs font-bold">출</span>
+                            </div>
+                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                              {t('settings.workTimeRange')}
+                            </label>
                           </div>
-                          <label className="text-sm font-medium text-gray-900 dark:text-white">
-                            {t('settings.workTimeRange')}
-                          </label>
+                          <div className="flex items-center space-x-2">
+                            <Bell className="w-4 h-4 text-gray-400" />
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={settings.schedule.workNotificationEnabled}
+                                onChange={(e) => handleScheduleChange({ workNotificationEnabled: e.target.checked })}
+                                className="sr-only"
+                              />
+                              <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
+                                settings.schedule.workNotificationEnabled 
+                                  ? 'bg-emerald-500' 
+                                  : 'bg-gray-300 dark:bg-gray-600'
+                              }`}>
+                                <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                                  settings.schedule.workNotificationEnabled ? 'translate-x-4' : 'translate-x-0.5'
+                                } mt-0.5`} />
+                              </div>
+                            </label>
+                          </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
@@ -322,13 +344,35 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                       
                       {/* 퇴근 가능 시간 */}
                       <div>
-                        <div className="flex items-center mb-2">
-                          <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
-                            <span className="text-white text-xs font-bold">퇴</span>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center">
+                            <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
+                              <span className="text-white text-xs font-bold">퇴</span>
+                            </div>
+                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                              {t('settings.leaveTimeRange')}
+                            </label>
                           </div>
-                          <label className="text-sm font-medium text-gray-900 dark:text-white">
-                            {t('settings.leaveTimeRange')}
-                          </label>
+                          <div className="flex items-center space-x-2">
+                            <Bell className="w-4 h-4 text-gray-400" />
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={settings.schedule.leaveNotificationEnabled}
+                                onChange={(e) => handleScheduleChange({ leaveNotificationEnabled: e.target.checked })}
+                                className="sr-only"
+                              />
+                              <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
+                                settings.schedule.leaveNotificationEnabled 
+                                  ? 'bg-orange-500' 
+                                  : 'bg-gray-300 dark:bg-gray-600'
+                              }`}>
+                                <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                                  settings.schedule.leaveNotificationEnabled ? 'translate-x-4' : 'translate-x-0.5'
+                                } mt-0.5`} />
+                              </div>
+                            </label>
+                          </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
@@ -358,13 +402,35 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                       
                       {/* 활동 시간 */}
                       <div>
-                        <div className="flex items-center mb-2">
-                          <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2">
-                            <span className="text-white text-xs font-bold">활</span>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center">
+                            <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2">
+                              <span className="text-white text-xs font-bold">활</span>
+                            </div>
+                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                              활동 시간
+                            </label>
                           </div>
-                          <label className="text-sm font-medium text-gray-900 dark:text-white">
-                            활동 시간
-                          </label>
+                          <div className="flex items-center space-x-2">
+                            <Bell className="w-4 h-4 text-gray-400" />
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={settings.schedule.activityNotificationEnabled}
+                                onChange={(e) => handleScheduleChange({ activityNotificationEnabled: e.target.checked })}
+                                className="sr-only"
+                              />
+                              <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
+                                settings.schedule.activityNotificationEnabled 
+                                  ? 'bg-purple-500' 
+                                  : 'bg-gray-300 dark:bg-gray-600'
+                              }`}>
+                                <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
+                                  settings.schedule.activityNotificationEnabled ? 'translate-x-4' : 'translate-x-0.5'
+                                } mt-0.5`} />
+                              </div>
+                            </label>
+                          </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
