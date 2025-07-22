@@ -1,0 +1,247 @@
+import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { Toaster } from 'react-hot-toast';
+import { Settings, RefreshCw } from 'lucide-react';
+
+import { useAppStore } from './store/useAppStore';
+import { useGeolocation } from './hooks/useGeolocation';
+import { useWeatherData } from './hooks/useWeatherQuery';
+
+import { WeatherCard } from './components/WeatherCard';
+import { ForecastCard } from './components/ForecastCard';
+import { LocationButton } from './components/LocationButton';
+import { SettingsModal } from './components/SettingsModal';
+import { ScheduleCard } from './components/ScheduleCard';
+import { ApiKeyStatus } from './components/ApiKeyStatus';
+import { ApiUsageMonitor } from './components/ApiUsageMonitor';
+import { EnvDebugger } from './components/EnvDebugger';
+import { ApiKeyTester } from './components/ApiKeyTester';
+import { Button, LoadingSpinner } from './components/ui';
+
+function App() {
+  const { t } = useTranslation();
+  const { 
+    isSettingsOpen, 
+    setSettingsOpen, 
+    currentLocation,
+    settings 
+  } = useAppStore();
+  
+  const { requestLocation } = useGeolocation();
+  
+  const {
+    currentWeather,
+    forecast,
+    isLoading,
+    isError,
+    error,
+    refetch
+  } = useWeatherData(
+    currentLocation?.latitude || null,
+    currentLocation?.longitude || null
+  );
+
+  // 앱 시작 시 위치 요청
+  useEffect(() => {
+    if (!currentLocation) {
+      requestLocation();
+    }
+  }, []);
+
+  // 테마 적용
+  useEffect(() => {
+    const applyTheme = () => {
+      const root = document.documentElement;
+      
+      // 기존 테마 클래스 제거
+      root.classList.remove('dark');
+      
+      if (settings.theme === 'dark') {
+        root.classList.add('dark');
+        console.log('다크 모드 적용');
+      } else if (settings.theme === 'light') {
+        console.log('라이트 모드 적용');
+      } else {
+        // system 모드
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+          root.classList.add('dark');
+          console.log('시스템 다크 모드 적용');
+        } else {
+          console.log('시스템 라이트 모드 적용');
+        }
+      }
+    };
+    
+    applyTheme();
+    
+    // 시스템 모드일 때 미디어 쿼리 리스너 추가
+    if (settings.theme === 'system') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = () => applyTheme();
+      
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, [settings.theme]);
+
+  const handleRefresh = () => {
+    refetch();
+    if (!currentLocation) {
+      requestLocation();
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-sky-300 via-sky-200 to-blue-200 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-100 transition-all duration-500">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-white/70 dark:bg-slate-800/90 backdrop-blur-md border-b border-sky-300/30 dark:border-slate-700 shadow-lg shadow-sky-200/20 dark:shadow-slate-900/50 transition-all duration-300">
+        <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-semibold text-slate-900 dark:text-white">
+              {t('app.title')}
+            </h1>
+            <p className="text-sm text-slate-600 dark:text-slate-300">
+              {t('app.subtitle')}
+            </p>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleRefresh}
+              className="p-2"
+            >
+              <RefreshCw className="w-5 h-5" />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSettingsOpen(true)}
+              className="p-2"
+            >
+              <Settings className="w-5 h-5" />
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-md mx-auto px-4 py-6">
+        {/* Environment Debugger (dev only) */}
+        <EnvDebugger />
+        
+        {/* API Key Tester (dev only) */}
+        <ApiKeyTester />
+        
+        {/* API Key Status */}
+        <ApiKeyStatus />
+        
+        {/* API Usage Monitor */}
+        <ApiUsageMonitor />
+        
+        {/* Schedule Card */}
+        <ScheduleCard />
+        
+        {/* Location Button */}
+        <LocationButton />
+
+        {/* Loading State */}
+        <AnimatePresence>
+          {isLoading && (
+            <motion.div 
+              className="flex flex-col items-center justify-center py-12"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+            >
+              <LoadingSpinner size="lg" className="text-blue-600 dark:text-blue-400 mb-4" />
+              <p className="text-slate-600 dark:text-slate-300">
+                {t('weather.loading')}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Error State */}
+        <AnimatePresence>
+          {isError && (
+            <motion.div 
+              className="text-center py-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+            >
+              <p className="mb-4 text-red-600 dark:text-red-400">
+                {error?.message || t('weather.error')}
+              </p>
+              <Button onClick={handleRefresh}>
+                {t('weather.retry')}
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Weather Data */}
+        <AnimatePresence>
+          {currentWeather && !isLoading && (
+            <>
+              <WeatherCard weather={currentWeather} />
+              
+              {forecast && (
+                <ForecastCard 
+                  hourly={forecast.hourly} 
+                  daily={forecast.daily} 
+                />
+              )}
+            </>
+          )}
+        </AnimatePresence>
+
+        {/* Empty State */}
+        <AnimatePresence>
+          {!currentLocation && !isLoading && !isError && (
+            <motion.div 
+              className="text-center py-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <p className="mb-4 text-slate-600 dark:text-slate-300">
+                {t('location.enableLocation')}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
+
+      {/* Settings Modal */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setSettingsOpen(false)}
+      />
+
+      {/* Toast Notifications */}
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: 'var(--color-surface)',
+            color: 'var(--color-text-primary)',
+            borderRadius: '10px',
+            border: '1px solid var(--color-border)',
+          },
+        }}
+      />
+    </div>
+  );
+}
+
+export default App;
