@@ -94,7 +94,7 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
     const notifyBefore = settings.weatherNotifications.notifyBefore;
 
     // 출근 시간 알림
-    if (settings.schedule.workNotificationEnabled && settings.schedule.workStartTime) {
+    if (settings.schedule.workStartTime) {
       const minutesUntilWork = getMinutesUntilTime(settings.schedule.workStartTime);
       if (minutesUntilWork === notifyBefore) {
         showWeatherNotification('work');
@@ -102,18 +102,10 @@ export const useWeatherNotifications = ({ currentWeather }: UseWeatherNotificati
     }
 
     // 퇴근 시간 알림
-    if (settings.schedule.leaveNotificationEnabled && settings.schedule.leaveStartTime) {
+    if (settings.schedule.leaveStartTime) {
       const minutesUntilLeave = getMinutesUntilTime(settings.schedule.leaveStartTime);
       if (minutesUntilLeave === notifyBefore) {
         showWeatherNotification('leave');
-      }
-    }
-
-    // 활동 시간 알림
-    if (settings.schedule.activityNotificationEnabled && settings.schedule.activityStartTime) {
-      const minutesUntilActivity = getMinutesUntilTime(settings.schedule.activityStartTime);
-      if (minutesUntilActivity === notifyBefore) {
-        showWeatherNotification('activity');
       }
     }
   };

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store/useAppStore';
 import { Button, Card } from './ui';
-import { X, Globe, Palette, Thermometer, Clock, Bell, CloudRain } from 'lucide-react';
+import { X, Globe, Palette, Thermometer, Clock, CloudRain } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
