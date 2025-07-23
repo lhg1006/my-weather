@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useAppStore } from '../store/useAppStore';
 import { getCurrentTimeStatus } from '../utils/schedule';
 import { Card } from './ui';
-import { Clock, Briefcase, Activity, Coffee } from 'lucide-react';
+import { Clock, Briefcase, Coffee, Laptop } from 'lucide-react';
 
 export const ScheduleCard = () => {
   const { settings } = useAppStore();
@@ -31,8 +31,8 @@ export const ScheduleCard = () => {
         return <Briefcase className="w-5 h-5" />;
       case 'canLeave':
         return <Clock className="w-5 h-5" />;
-      case 'activity':
-        return <Activity className="w-5 h-5" />;
+      case 'working':
+        return <Laptop className="w-5 h-5" />;
       case 'rest':
         return <Coffee className="w-5 h-5" />;
       default:
@@ -46,7 +46,7 @@ export const ScheduleCard = () => {
         return 'text-blue-600 dark:text-blue-400';
       case 'canLeave':
         return 'text-purple-600 dark:text-purple-400';
-      case 'activity':
+      case 'working':
         return 'text-green-600 dark:text-green-400';
       case 'rest':
         return 'text-orange-600 dark:text-orange-400';
@@ -61,7 +61,7 @@ export const ScheduleCard = () => {
         return 'bg-blue-100 dark:bg-blue-900/20';
       case 'canLeave':
         return 'bg-purple-100 dark:bg-purple-900/20';
-      case 'activity':
+      case 'working':
         return 'bg-green-100 dark:bg-green-900/20';
       case 'rest':
         return 'bg-orange-100 dark:bg-orange-900/20';
@@ -84,7 +84,7 @@ export const ScheduleCard = () => {
       <div className="flex items-center">
         {/* 아이콘 영역 - 고정 너비 */}
         <div className="w-12 flex-shrink-0">
-          <div className={`p-2 rounded-lg ${getStatusBg()}`}>
+          <div className={`p-2 rounded-lg ${getStatusBg()} flex items-center justify-center`}>
             <div className={getStatusColor()}>
               {getStatusIcon()}
             </div>
@@ -151,20 +151,6 @@ export const ScheduleCard = () => {
           <span className="text-slate-600 dark:text-slate-300">퇴근</span>
           <span className="font-medium text-slate-900 dark:text-white">
             {settings.schedule.leaveStartTime} - {settings.schedule.leaveEndTime}
-          </span>
-        </div>
-        <div 
-          className="flex items-center justify-between p-3 rounded-lg"
-          style={{
-            background: 'rgba(255, 255, 255, 0.4)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 4px 16px rgba(31, 38, 135, 0.2)'
-          }}
-        >
-          <span className="text-slate-600 dark:text-slate-300">활동</span>
-          <span className="font-medium text-slate-900 dark:text-white">
-            {settings.schedule.activityStartTime} - {settings.schedule.activityEndTime}
           </span>
         </div>
       </div>

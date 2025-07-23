@@ -251,16 +251,11 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
 
                 {/* 스케줄 설정 */}
                 <div>
-                  <div className="flex items-center justify-between mb-3 mt-6">
-                    <div className="flex items-center">
-                      <Clock className="w-5 h-5 text-ios-blue mr-2" />
-                      <h3 className="text-sm font-medium text-gray-700 dark:text-white">
-                        {t('settings.schedule')}
-                      </h3>
-                    </div>
-                    <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                      <Bell className="w-4 h-4 text-ios-blue" />
-                    </button>
+                  <div className="flex items-center mb-3 mt-6">
+                    <Clock className="w-5 h-5 text-ios-blue mr-2" />
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-white">
+                      {t('settings.schedule')}
+                    </h3>
                   </div>
                   
                   {/* 스케줄 기능 활성화 */}
@@ -296,41 +291,15 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                     <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
                       {/* 출근 가능 시간 */}
                       <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center">
-                            <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-white text-xs font-bold">{t('settings.workShort')}</span>
-                            </div>
-                            <label className="text-sm font-medium text-gray-700 dark:text-white">
-                              {t('settings.workTimeRange')}
-                            </label>
+                        <div className="flex items-center mb-2">
+                          <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center mr-2">
+                            <span className="text-white text-xs font-bold">{t('settings.workShort')}</span>
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <Bell className={`w-4 h-4 transition-colors duration-200 ${
-                              settings.schedule.workNotificationEnabled 
-                                ? 'text-emerald-500' 
-                                : 'text-gray-400'
-                            }`} />
-                            <label className="relative inline-flex items-center cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={settings.schedule.workNotificationEnabled}
-                                onChange={(e) => handleScheduleChange({ workNotificationEnabled: e.target.checked })}
-                                className="sr-only"
-                              />
-                              <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
-                                settings.schedule.workNotificationEnabled 
-                                  ? 'bg-emerald-500' 
-                                  : 'bg-gray-300 dark:bg-gray-600'
-                              }`}>
-                                <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
-                                  settings.schedule.workNotificationEnabled ? 'translate-x-4' : 'translate-x-0.5'
-                                } mt-0.5`} />
-                              </div>
-                            </label>
-                          </div>
+                          <label className="text-sm font-medium text-gray-700 dark:text-white">
+                            {t('settings.workTimeRange')}
+                          </label>
                         </div>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-2">
                           <div>
                             <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.from')}
@@ -339,7 +308,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.workStartTime}
                               onChange={(e) => handleScheduleChange({ workStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full max-w-[120px] px-2 py-1.5 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                           <div>
@@ -350,7 +319,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.workEndTime}
                               onChange={(e) => handleScheduleChange({ workEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full max-w-[120px] px-2 py-1.5 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                             />
                           </div>
                         </div>
@@ -358,41 +327,15 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                       
                       {/* 퇴근 가능 시간 */}
                       <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center">
-                            <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-white text-xs font-bold">{t('settings.leaveShort')}</span>
-                            </div>
-                            <label className="text-sm font-medium text-gray-700 dark:text-white">
-                              {t('settings.leaveTimeRange')}
-                            </label>
+                        <div className="flex items-center mb-2">
+                          <div className="w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center mr-2">
+                            <span className="text-white text-xs font-bold">{t('settings.leaveShort')}</span>
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <Bell className={`w-4 h-4 transition-colors duration-200 ${
-                              settings.schedule.leaveNotificationEnabled 
-                                ? 'text-orange-500' 
-                                : 'text-gray-400'
-                            }`} />
-                            <label className="relative inline-flex items-center cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={settings.schedule.leaveNotificationEnabled}
-                                onChange={(e) => handleScheduleChange({ leaveNotificationEnabled: e.target.checked })}
-                                className="sr-only"
-                              />
-                              <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
-                                settings.schedule.leaveNotificationEnabled 
-                                  ? 'bg-orange-500' 
-                                  : 'bg-gray-300 dark:bg-gray-600'
-                              }`}>
-                                <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
-                                  settings.schedule.leaveNotificationEnabled ? 'translate-x-4' : 'translate-x-0.5'
-                                } mt-0.5`} />
-                              </div>
-                            </label>
-                          </div>
+                          <label className="text-sm font-medium text-gray-700 dark:text-white">
+                            {t('settings.leaveTimeRange')}
+                          </label>
                         </div>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-2">
                           <div>
                             <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
                               {t('settings.from')}
@@ -401,7 +344,7 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.leaveStartTime}
                               onChange={(e) => handleScheduleChange({ leaveStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full max-w-[120px] px-2 py-1.5 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                           <div>
@@ -412,81 +355,13 @@ export const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                               type="time"
                               value={settings.schedule.leaveEndTime}
                               onChange={(e) => handleScheduleChange({ leaveEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              className="w-full max-w-[120px] px-2 py-1.5 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             />
                           </div>
                         </div>
                       </div>
                       
-                      {/* 활동 시간 */}
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center">
-                            <div className="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mr-2">
-                              <span className="text-white text-xs font-bold">{t('settings.activityShort')}</span>
-                            </div>
-                            <label className="text-sm font-medium text-gray-700 dark:text-white">
-                              {t('settings.activityTime')}
-                            </label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <Bell className={`w-4 h-4 transition-colors duration-200 ${
-                              settings.schedule.activityNotificationEnabled 
-                                ? 'text-purple-500' 
-                                : 'text-gray-400'
-                            }`} />
-                            <label className="relative inline-flex items-center cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={settings.schedule.activityNotificationEnabled}
-                                onChange={(e) => handleScheduleChange({ activityNotificationEnabled: e.target.checked })}
-                                className="sr-only"
-                              />
-                              <div className={`w-8 h-4 rounded-full transition-colors duration-200 ${
-                                settings.schedule.activityNotificationEnabled 
-                                  ? 'bg-purple-500' 
-                                  : 'bg-gray-300 dark:bg-gray-600'
-                              }`}>
-                                <div className={`w-3 h-3 bg-white rounded-full shadow-md transform transition-transform duration-200 ${
-                                  settings.schedule.activityNotificationEnabled ? 'translate-x-4' : 'translate-x-0.5'
-                                } mt-0.5`} />
-                              </div>
-                            </label>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3">
-                          <div>
-                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                              {t('settings.activityStartTime')}
-                            </label>
-                            <input
-                              type="time"
-                              value={settings.schedule.activityStartTime}
-                              onChange={(e) => handleScheduleChange({ activityStartTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">
-                              {t('settings.activityEndTime')}
-                            </label>
-                            <input
-                              type="time"
-                              value={settings.schedule.activityEndTime}
-                              onChange={(e) => handleScheduleChange({ activityEndTime: e.target.value })}
-                              className="w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-ios text-sm text-gray-700 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                            />
-                          </div>
-                        </div>
-                      </div>
 
-                      {/* 알림 설정 버튼 */}
-                      <div className="mt-4">
-                        <button className="w-full bg-ios-blue hover:bg-ios-blue/90 text-white font-medium py-3 px-4 rounded-ios transition-colors flex items-center justify-center space-x-2">
-                          <Bell className="w-4 h-4" />
-                          <span>{t('settings.notificationSettings')}</span>
-                        </button>
-                      </div>
                     </div>
                   )}
                 </div>
