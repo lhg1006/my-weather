@@ -5,7 +5,6 @@ export interface WeatherData {
   windSpeed: number;
   pressure: number;
   visibility: number;
-  uvIndex: number;
   feelsLike: number;
   description: string;
   icon: string;

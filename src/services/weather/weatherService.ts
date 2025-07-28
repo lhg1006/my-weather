@@ -42,7 +42,6 @@ export class WeatherService {
         windSpeed: Math.round(data.wind.speed * 3.6), // m/s to km/h
         pressure: data.main.pressure,
         visibility: data.visibility / 1000, // meters to km
-        uvIndex: 0, // OpenWeather free tier doesn't include UV
         feelsLike: Math.round(data.main.feels_like),
         description: getWeatherDescriptionInKorean(data.weather[0].description),
         icon: data.weather[0].icon,

@@ -8,6 +8,7 @@ import { useAppStore } from './store/useAppStore';
 import { useGeolocation } from './hooks/useGeolocation';
 import { useWeatherData } from './hooks/useWeatherQuery';
 import { useWeatherNotifications } from './hooks/useWeatherNotifications';
+import { useInitialWeatherAlert } from './hooks/useInitialWeatherAlert';
 
 import { WeatherCard } from './components/WeatherCard';
 import { ForecastCard } from './components/ForecastCard';
@@ -41,6 +42,11 @@ function App() {
 
   // 날씨 알림 시스템
   useWeatherNotifications({
+    currentWeather: currentWeather || null
+  });
+
+  // 앱 접근 시 초기 날씨 알림
+  useInitialWeatherAlert({
     currentWeather: currentWeather || null
   });
 

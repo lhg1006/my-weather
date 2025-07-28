@@ -10,8 +10,7 @@ import {
   Droplets, 
   Wind, 
   Eye, 
-  Gauge,
-  Sun
+  Gauge
 } from 'lucide-react';
 
 interface WeatherCardProps {
@@ -66,11 +65,6 @@ export const WeatherCard = ({ weather }: WeatherCardProps) => {
       icon: <Gauge className="w-5 h-5" />,
       label: t('weather.pressure'),
       value: `${weather.pressure} hPa`,
-    },
-    {
-      icon: <Sun className="w-5 h-5" />,
-      label: t('weather.uvIndex'),
-      value: weather.uvIndex.toString(),
     },
   ];
 
