@@ -18,9 +18,9 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
   } = useAppStore();
 
   const defaultOptions: PositionOptions = {
-    enableHighAccuracy: true,
-    timeout: 10000, // 10초 타임아웃
-    maximumAge: 300000, // 5분간 캐시된 위치 허용
+    enableHighAccuracy: false, // iOS PWA에서는 false가 더 안정적
+    timeout: 30000, // 30초로 타임아웃 증가 (iOS PWA 대응)
+    maximumAge: 60000, // 1분간 캐시된 위치 허용 (더 자주 업데이트)
     ...options,
   };
 
@@ -51,7 +51,7 @@ export const useGeolocation = (options: GeolocationOptions = {}) => {
           
           switch (error.code) {
             case error.PERMISSION_DENIED:
-              errorMessage = '위치 권한이 거부되었습니다. 브라우저 설정에서 위치 권한을 허용해주세요.';
+              errorMessage = '위치 권한이 거부되었습니다. 설정 > 개인정보 보호 및 보안 > 위치 서비스에서 Safari 또는 MyWeather의 위치 권한을 허용해주세요.';
               break;
             case error.POSITION_UNAVAILABLE:
               errorMessage = '위치 정보를 사용할 수 없습니다.';
