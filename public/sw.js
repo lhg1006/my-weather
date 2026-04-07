@@ -1,4 +1,4 @@
-const CACHE_NAME = 'weather-app-v2';
+const CACHE_NAME = 'weather-app-v3';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
@@ -7,8 +7,9 @@ const urlsToCache = [
   'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap',
 ];
 
-// 서비스 워커 설치
+// 서비스 워커 설치 — 즉시 활성화
 self.addEventListener('install', (event) => {
+  self.skipWaiting(); // 대기하지 않고 즉시 활성화
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
@@ -21,7 +22,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// 서비스 워커 활성화
+// 서비스 워커 활성화 — 이전 캐시 삭제 + 즉시 제어
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -33,6 +34,8 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      return self.clients.claim(); // 열린 모든 탭을 즉시 제어
     })
   );
 });
@@ -60,41 +63,30 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 정적 리소스는 캐시 우선
+  // 정적 리소스는 네트워크 우선, 실패 시 캐시 폴백
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        // 캐시에 있으면 캐시된 버전 반환
-        if (response) {
-          return response;
-        }
-
-        // 캐시에 없으면 네트워크에서 가져오기
-        return fetch(event.request).then((response) => {
-          // 유효한 응답인지 확인
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-
-          // 응답 복제 (한 번만 사용 가능하므로)
+        // 유효한 응답이면 캐시 업데이트
+        if (response && response.status === 200) {
           const responseToCache = response.clone();
-
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              // chrome-extension 스킴 요청은 캐시하지 않음
-              if (!event.request.url.startsWith('chrome-extension://')) {
-                cache.put(event.request, responseToCache);
-              }
-            });
-
-          return response;
-        });
+          caches.open(CACHE_NAME).then((cache) => {
+            if (!event.request.url.startsWith('chrome-extension://')) {
+              cache.put(event.request, responseToCache);
+            }
+          });
+        }
+        return response;
       })
       .catch(() => {
-        // 오프라인 상태에서 HTML 요청 시 기본 페이지 반환
-        if (event.request.destination === 'document') {
-          return caches.match('/');
-        }
+        // 네트워크 실패 시 캐시에서 반환 (오프라인 대응)
+        return caches.match(event.request).then((response) => {
+          if (response) return response;
+          // 오프라인 + 캐시 없음 → HTML이면 홈 반환
+          if (event.request.destination === 'document') {
+            return caches.match('/');
+          }
+        });
       })
   );
 });
