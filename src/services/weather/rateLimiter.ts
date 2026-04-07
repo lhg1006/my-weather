@@ -32,6 +32,15 @@ class RateLimiter {
         console.warn('Failed to parse stored API calls:', error);
       }
     }
+    // sessionStorage에서 마지막 호출 시간 복원 (새로고침 시 유지, 탭 닫으면 리셋)
+    const lastCall = sessionStorage.getItem('api-last-call-time');
+    if (lastCall) {
+      try {
+        this.lastCallTime = JSON.parse(lastCall);
+      } catch (error) {
+        console.warn('Failed to parse stored last call time:', error);
+      }
+    }
   }
 
   private saveToStorage() {
@@ -111,7 +120,8 @@ class RateLimiter {
     }
     
     this.calls[apiName].push(now);
-    this.lastCallTime[apiName] = now; // 마지막 호출 시간 기록
+    this.lastCallTime[apiName] = now;
+    sessionStorage.setItem('api-last-call-time', JSON.stringify(this.lastCallTime));
     this.updateDailyCount(apiName);
     
     console.log(`API 호출 기록: ${apiName} (오늘: ${this.dailyCalls[apiName]?.count || 0})`);
