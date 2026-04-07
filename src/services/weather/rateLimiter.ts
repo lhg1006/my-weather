@@ -67,13 +67,15 @@ class RateLimiter {
 
   canMakeCall(apiName: 'openweather'): boolean {
     const now = Date.now();
-    
-    // 30초 간격 체크 (우선순위 가장 높음)
+
+    // 30초 간격 체크 — 단, 초기 로딩(lastCallTime 없음)이거나
+    // 동시 호출(2초 이내 연속)은 허용
     const lastCall = this.lastCallTime[apiName] || 0;
     const timeSinceLastCall = now - lastCall;
     const minInterval = 30 * 1000; // 30초
-    
-    if (timeSinceLastCall < minInterval) {
+    const batchWindow = 2 * 1000; // 2초 이내 동시 호출은 허용
+
+    if (lastCall > 0 && timeSinceLastCall < minInterval && timeSinceLastCall > batchWindow) {
       return false;
     }
     
@@ -138,10 +140,11 @@ class RateLimiter {
 
   getRemainingTime(apiName: 'openweather'): number {
     const lastCall = this.lastCallTime[apiName] || 0;
+    if (lastCall === 0) return 0;
     const timeSinceLastCall = Date.now() - lastCall;
     const minInterval = 30 * 1000; // 30초
     const remainingTime = Math.ceil((minInterval - timeSinceLastCall) / 1000);
-    
+
     return Math.max(0, remainingTime);
   }
 }
